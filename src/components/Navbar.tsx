@@ -22,7 +22,7 @@ const Navbar = () => {
       className="fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-md border-b border-border"
     >
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
-        <img src={logo} alt="Impire Home Care LLC" className="h-14 w-auto" />
+        <img src={logo} alt="Empire Home Care LLC" className="h-20 w-auto" />
 
         <ul className="hidden md:flex items-center gap-8 font-body text-sm font-medium tracking-wide">
           {navLinks.map((link) => (
