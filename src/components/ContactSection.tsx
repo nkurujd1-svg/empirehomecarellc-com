@@ -25,7 +25,7 @@ const ContactSection = () => {
 
             <div className="space-y-6">
               {[
-                { icon: Phone, label: "(605) 321-8915", href: "tel:+16053218915" },
+                { icon: Phone, label: "078 965 2258", href: "tel:+10789652258" },
                 { icon: Mail, label: "info@empirehomecare.com", href: "mailto:info@empirehomecare.com" },
                 { icon: MapPin, label: "707 W 11th St, Sioux Falls, SD 57104", href: "https://maps.google.com/?q=707+W+11th+St+Sioux+Falls+SD+57104" },
               ].map((c) => (
@@ -62,7 +62,7 @@ const ContactSection = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="John Doe"
+                    placeholder="Chance"
                     className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   />
                 </div>
