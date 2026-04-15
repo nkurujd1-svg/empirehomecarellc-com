@@ -62,7 +62,7 @@ const ContactSection = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="John Doe"
+                    placeholder="Chance"
                     className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   />
                 </div>
