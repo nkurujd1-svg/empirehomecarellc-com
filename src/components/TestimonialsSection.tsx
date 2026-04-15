@@ -1,25 +1,21 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
-const testimonials = [
-  {
-    name: "Nyamahoro Aimee",
-    relation: "Daughter of Client",
-    text: "Empire Home Care has been a blessing for our family. The caregivers are incredibly kind and professional. My mother looks forward to their visits every day.",
-  },
-  {
-    name: "Robert Musore",
-    relation: "Client",
-    text: "I was reluctant about having someone come to my home, but the team at Empire made me feel comfortable from day one. They truly care about my well-being.",
-  },
-  {
-    name: "Sarah Nyamahoro",
-    relation: "Daughter of Client",
-    text: "The level of communication and transparency is outstanding. We always know how Dad is doing, and the care plans are customized perfectly to his needs.",
-  },
-];
+type Testimonial = { id: string; name: string; relation: string; text: string; rating: number };
 
 const TestimonialsSection = () => {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await supabase.from("testimonials").select("*").eq("is_visible", true);
+      if (data) setTestimonials(data);
+    };
+    fetch();
+  }, []);
+
   return (
     <section id="testimonials" className="py-24 bg-warm">
       <div className="container mx-auto px-4">
@@ -35,7 +31,7 @@ const TestimonialsSection = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((t, i) => (
             <motion.div
-              key={t.name}
+              key={t.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -44,7 +40,7 @@ const TestimonialsSection = () => {
             >
               <Quote className="h-8 w-8 text-secondary/20 absolute top-6 right-6" />
               <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, j) => (
+                {[...Array(t.rating)].map((_, j) => (
                   <Star key={j} className="h-4 w-4 fill-secondary text-secondary" />
                 ))}
               </div>
