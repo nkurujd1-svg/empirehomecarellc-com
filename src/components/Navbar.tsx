@@ -39,13 +39,6 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <a
-          href="tel:+10789652258"
-          className="hidden md:inline-flex items-center gap-2 rounded-lg bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors"
-        >
-          <Phone className="h-4 w-4" />
-          Call Us
-        </a>
 
         <button onClick={() => setOpen(!open)} className="md:hidden text-foreground">
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
