@@ -1,4 +1,4 @@
-import { LayoutDashboard, MessageSquare, Star, FileText, LogOut } from "lucide-react";
+import { LayoutDashboard, MessageSquare, Star, FileText, LogOut, Settings } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -21,6 +21,7 @@ const items = [
   { title: "Testimonials", url: "/admin/testimonials", icon: Star },
   { title: "Contact Submissions", url: "/admin/submissions", icon: MessageSquare },
   { title: "Site Content", url: "/admin/content", icon: FileText },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
 ];
 
 export function AdminSidebar() {
