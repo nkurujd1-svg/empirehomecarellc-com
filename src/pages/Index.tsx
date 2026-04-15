@@ -1,9 +1,21 @@
-import logo from "@/assets/impire-home-care-logo.png";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import ServicesSection from "@/components/ServicesSection";
+import AboutSection from "@/components/AboutSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <img src={logo} alt="Impire Home Care LLC logo" width={512} height={512} />
+    <div className="min-h-screen">
+      <Navbar />
+      <HeroSection />
+      <ServicesSection />
+      <AboutSection />
+      <TestimonialsSection />
+      <ContactSection />
+      <Footer />
     </div>
   );
 };
