@@ -1,4 +1,4 @@
-import { Heart, Twitter, Linkedin } from "lucide-react";
+import { Heart } from "lucide-react";
 import logo from "@/assets/empire-home-care-logo.png";
 
 const TikTokIcon = ({ className }: { className?: string }) => (
