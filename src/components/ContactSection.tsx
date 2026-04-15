@@ -1,7 +1,25 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState({ full_name: "", phone: "", email: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    const { error } = await supabase.from("contact_submissions").insert(formData);
+    if (error) {
+      toast({ title: "Error", description: "Failed to submit. Please try again.", variant: "destructive" });
+    } else {
+      toast({ title: "Sent!", description: "We'll get back to you soon." });
+      setFormData({ full_name: "", phone: "", email: "", message: "" });
+    }
+    setSubmitting(false);
+  };
   return (
     <section id="contact" className="py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -52,56 +70,29 @@ const ContactSection = () => {
             transition={{ duration: 0.6 }}
           >
             <form
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubmit}
               className="bg-card rounded-xl p-8 shadow-sm border border-border space-y-5"
             >
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5 font-body">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Chance"
-                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                  />
+                  <label className="block text-sm font-medium text-foreground mb-1.5 font-body">Full Name</label>
+                  <input type="text" required value={formData.full_name} onChange={(e) => setFormData({ ...formData, full_name: e.target.value })} placeholder="Chance" className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5 font-body">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    placeholder="(123) 456-7890"
-                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                  />
+                  <label className="block text-sm font-medium text-foreground mb-1.5 font-body">Phone</label>
+                  <input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="(123) 456-7890" className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5 font-body">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                />
+                <label className="block text-sm font-medium text-foreground mb-1.5 font-body">Email</label>
+                <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="Your email" className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5 font-body">
-                  How Can We Help?
-                </label>
-                <textarea
-                  rows={4}
-                  placeholder="Tell us about your care needs..."
-                  className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-                />
+                <label className="block text-sm font-medium text-foreground mb-1.5 font-body">How Can We Help?</label>
+                <textarea rows={4} required value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Tell us about your care needs..." className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
               </div>
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-7 py-3.5 text-base font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors"
-              >
-                Request Free Consultation
+              <button type="submit" disabled={submitting} className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-7 py-3.5 text-base font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors disabled:opacity-50">
+                {submitting ? "Sending..." : "Request Free Consultation"}
                 <ArrowRight className="h-5 w-5" />
               </button>
             </form>
