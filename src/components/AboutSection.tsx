@@ -29,7 +29,7 @@ const AboutSection = () => {
               <span className="text-secondary">Like Our Own</span>
             </h2>
             <p className="text-muted-foreground font-body leading-relaxed mb-6">
-              At Impire Home Care LLC, we believe that everyone deserves high-quality,
+              At Empire Home Care LLC, we believe that everyone deserves high-quality,
               compassionate care in the comfort of their own home. Our team of dedicated
               professionals is committed to enhancing the quality of life for seniors and
               individuals with special needs.

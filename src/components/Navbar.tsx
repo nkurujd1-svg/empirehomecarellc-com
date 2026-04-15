@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
-import logo from "@/assets/impire-home-care-logo.png";
+import logo from "@/assets/empire-home-care-logo.png";
 
 const navLinks = ["Home", "Services", "About", "Testimonials", "Contact"];
 
