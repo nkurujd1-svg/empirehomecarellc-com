@@ -89,26 +89,6 @@ const AdminLogin = () => {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Signing in..." : "Sign In"}
             </Button>
-            <button
-              type="button"
-              className="w-full text-sm text-muted-foreground hover:text-primary transition-colors"
-              onClick={async () => {
-                if (!email) {
-                  toast({ title: "Enter your email", description: "Please enter your email address first.", variant: "destructive" });
-                  return;
-                }
-                const { error } = await supabase.auth.resetPasswordForEmail(email, {
-                  redirectTo: `${window.location.origin}/admin/reset-password`,
-                });
-                if (error) {
-                  toast({ title: "Error", description: error.message, variant: "destructive" });
-                } else {
-                  toast({ title: "Check your email", description: "A password reset link has been sent." });
-                }
-              }}
-            >
-              Forgot password?
-            </button>
           </form>
         </CardContent>
       </Card>
