@@ -16,6 +16,7 @@ import AdminTestimonials from "./pages/AdminTestimonials";
 import AdminSubmissions from "./pages/AdminSubmissions";
 import AdminContent from "./pages/AdminContent";
 import AdminSettings from "./pages/AdminSettings";
+import AdminResetPassword from "./pages/AdminResetPassword";
 
 const queryClient = new QueryClient();
 
