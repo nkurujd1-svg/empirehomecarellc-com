@@ -38,7 +38,7 @@ const Navbar = () => {
         </ul>
 
         <a
-          href="tel:+1234567890"
+          href="tel:+16053218915"
           className="hidden md:inline-flex items-center gap-2 rounded-lg bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors"
         >
           <Phone className="h-4 w-4" />
@@ -69,7 +69,7 @@ const Navbar = () => {
             ))}
             <li>
               <a
-                href="tel:+1234567890"
+                href="tel:+16053218915"
                 className="inline-flex items-center gap-2 rounded-lg bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground"
               >
                 <Phone className="h-4 w-4" />

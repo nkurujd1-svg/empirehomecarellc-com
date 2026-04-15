@@ -8,9 +8,15 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           <div>
             <img src={logo} alt="Impire Home Care LLC" className="h-16 w-auto mb-4 brightness-0 invert" />
-            <p className="text-primary-foreground/60 font-body text-sm leading-relaxed">
+            <p className="text-primary-foreground/60 font-body text-sm leading-relaxed mb-4">
               Providing compassionate, professional home health care services that
               empower individuals to live with dignity and independence.
+            </p>
+            <p className="text-primary-foreground/60 font-body text-sm leading-relaxed">
+              📍 707 W 11th St, Sioux Falls, SD 57104
+            </p>
+            <p className="text-primary-foreground/60 font-body text-sm leading-relaxed">
+              📞 <a href="tel:+16053218915" className="hover:text-primary-foreground transition-colors">(605) 321-8915</a>
             </p>
           </div>
 
