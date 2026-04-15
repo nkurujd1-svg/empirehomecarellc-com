@@ -1,5 +1,5 @@
 import { Heart } from "lucide-react";
-import logo from "@/assets/impire-home-care-logo.png";
+import logo from "@/assets/empire-home-care-logo.png";
 
 const Footer = () => {
   return (
