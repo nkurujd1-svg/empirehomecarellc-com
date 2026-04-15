@@ -5,12 +5,12 @@ const testimonials = [
   {
     name: "Nyamahoro Aimee",
     relation: "Daughter of Client",
-    text: "Impire Home Care has been a blessing for our family. The caregivers are incredibly kind and professional. My mother looks forward to their visits every day.",
+    text: "Empire Home Care has been a blessing for our family. The caregivers are incredibly kind and professional. My mother looks forward to their visits every day.",
   },
   {
     name: "Robert Musore",
     relation: "Client",
-    text: "I was reluctant about having someone come to my home, but the team at Impire made me feel comfortable from day one. They truly care about my well-being.",
+    text: "I was reluctant about having someone come to my home, but the team at Empire made me feel comfortable from day one. They truly care about my well-being.",
   },
   {
     name: "Sarah Nyamahoro",

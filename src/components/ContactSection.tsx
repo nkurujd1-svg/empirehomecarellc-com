@@ -26,7 +26,7 @@ const ContactSection = () => {
             <div className="space-y-6">
               {[
                 { icon: Phone, label: "(605) 321-8915", href: "tel:+16053218915" },
-                { icon: Mail, label: "info@impirehomecare.com", href: "mailto:info@impirehomecare.com" },
+                { icon: Mail, label: "info@empirehomecare.com", href: "mailto:info@empirehomecare.com" },
                 { icon: MapPin, label: "707 W 11th St, Sioux Falls, SD 57104", href: "https://maps.google.com/?q=707+W+11th+St+Sioux+Falls+SD+57104" },
               ].map((c) => (
                 <a

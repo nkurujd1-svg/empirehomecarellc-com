@@ -35,7 +35,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-lg text-primary-foreground/80 font-body leading-relaxed mb-8 max-w-lg">
-            Impire Home Care LLC provides personalized, professional home health services
+            Empire Home Care LLC provides personalized, professional home health services
             that empower your loved ones to live with dignity, comfort, and independence.
           </p>
 

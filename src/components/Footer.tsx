@@ -50,7 +50,7 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-primary-foreground/40 text-xs font-body">
-            © {new Date().getFullYear()} Impire Home Care LLC. All rights reserved.
+            © {new Date().getFullYear()} Empire Home Care LLC. All rights reserved.
           </p>
           <p className="text-primary-foreground/40 text-xs font-body flex items-center gap-1">
             Made with <Heart className="h-3 w-3 text-secondary fill-secondary" /> for families
