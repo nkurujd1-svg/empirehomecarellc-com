@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImg from "@/assets/hero-care.jpg";
 
 const HeroSection = () => {
@@ -40,19 +41,19 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="inline-flex items-center gap-2 rounded-lg bg-secondary px-7 py-3.5 text-base font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors shadow-lg shadow-secondary/25"
             >
               Get Started
               <ArrowRight className="h-5 w-5" />
-            </a>
-            <a
-              href="#services"
+            </Link>
+            <Link
+              to="/services"
               className="inline-flex items-center gap-2 rounded-lg border-2 border-primary-foreground/30 px-7 py-3.5 text-base font-semibold text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
             >
               Our Services
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
