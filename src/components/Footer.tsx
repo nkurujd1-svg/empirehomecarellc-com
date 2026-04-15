@@ -1,4 +1,4 @@
-import { Heart, Instagram, Facebook } from "lucide-react";
+import { Heart } from "lucide-react";
 import logo from "@/assets/empire-home-care-logo.png";
 
 const TwitterIcon = ({ className }: { className?: string }) => (
