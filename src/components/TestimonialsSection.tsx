@@ -3,17 +3,17 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Maria Johnson",
+    name: "Nyamahoro Aimee",
     relation: "Daughter of Client",
     text: "Impire Home Care has been a blessing for our family. The caregivers are incredibly kind and professional. My mother looks forward to their visits every day.",
   },
   {
-    name: "Robert Williams",
+    name: "Robert Musore",
     relation: "Client",
     text: "I was reluctant about having someone come to my home, but the team at Impire made me feel comfortable from day one. They truly care about my well-being.",
   },
   {
-    name: "Sarah Thompson",
+    name: "Sarah Nyamahoro",
     relation: "Daughter of Client",
     text: "The level of communication and transparency is outstanding. We always know how Dad is doing, and the care plans are customized perfectly to his needs.",
   },
