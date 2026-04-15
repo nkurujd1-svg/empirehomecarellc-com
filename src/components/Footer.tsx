@@ -36,6 +36,17 @@ const Footer = () => {
             <p className="text-primary-foreground/60 font-body text-sm leading-relaxed">
               📞 <a href="tel:+16053218915" className="hover:text-primary-foreground transition-colors">(605) 321-8915</a>
             </p>
+            <div className="flex items-center gap-3 mt-4">
+              <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
+                <TwitterIcon className="h-5 w-5" />
+              </a>
+              <a href="https://tiktok.com/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
+                <TikTokIcon className="h-5 w-5" />
+              </a>
+              <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
+                <LinkedInIcon className="h-5 w-5" />
+              </a>
+            </div>
           </div>
 
           <div>
