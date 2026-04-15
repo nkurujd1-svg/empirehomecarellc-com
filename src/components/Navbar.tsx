@@ -62,15 +62,6 @@ const Navbar = () => {
                 </button>
               </li>
             ))}
-            <li>
-              <a
-                href="tel:+10789652258"
-                className="inline-flex items-center gap-2 rounded-lg bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground"
-              >
-                <Phone className="h-4 w-4" />
-                Call Us
-              </a>
-            </li>
           </ul>
         </motion.div>
       )}
