@@ -46,7 +46,7 @@ const Footer = () => {
               📍 707 W 11th St, Sioux Falls, SD 57104
             </p>
             <p className="text-primary-foreground/60 font-body text-sm leading-relaxed">
-              📞 <a href="tel:+16053218915" className="hover:text-primary-foreground transition-colors">(605) 321-8915</a>
+              📞 <a href="tel:+10789652258" className="hover:text-primary-foreground transition-colors">078 965 2258</a>
             </p>
             <div className="flex items-center gap-3 mt-4">
               <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">
