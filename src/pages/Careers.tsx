@@ -1,0 +1,188 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Briefcase, Heart, Users, Send } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+
+const openRoles = [
+  {
+    title: "Personal Care Aide",
+    type: "Full-time / Part-time",
+    description: "Provide compassionate personal assistance to clients in their homes.",
+  },
+  {
+    title: "Home Health Aide",
+    type: "Full-time",
+    description: "Support clients with daily living activities and basic health monitoring.",
+  },
+  {
+    title: "Companion Caregiver",
+    type: "Part-time",
+    description: "Offer companionship, light housekeeping, and meal preparation.",
+  },
+];
+
+const perks = [
+  { icon: Heart, title: "Meaningful Work", text: "Make a real difference in clients' lives every day." },
+  { icon: Users, title: "Supportive Team", text: "Join a caring, professional, and welcoming team." },
+  { icon: Briefcase, title: "Competitive Pay", text: "Fair wages, flexible schedules, and growth opportunities." },
+];
+
+const Careers = () => {
+  const [form, setForm] = useState({ full_name: "", email: "", phone: "", message: "" });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    const { error } = await supabase.from("contact_submissions").insert({
+      full_name: form.full_name,
+      email: form.email || null,
+      phone: form.phone || null,
+      message: `[CAREER APPLICATION] ${form.message}`,
+    });
+    setLoading(false);
+    if (error) {
+      toast.error("Something went wrong. Please try again.");
+    } else {
+      toast.success("Application submitted! We'll be in touch soon.");
+      setForm({ full_name: "", email: "", phone: "", message: "" });
+    }
+  };
+
+  return (
+    <div className="min-h-screen">
+      <Navbar />
+
+      {/* Hero */}
+      <section className="pt-32 pb-16 bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+        <div className="container mx-auto px-4 text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="font-display text-4xl md:text-6xl font-bold text-foreground mb-4"
+          >
+            Join Our Caring Team
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="font-body text-lg text-foreground/70 max-w-2xl mx-auto"
+          >
+            Build a rewarding career with Empire Home Care LLC — where compassion meets opportunity.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Perks */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4 grid md:grid-cols-3 gap-6">
+          {perks.map((p, i) => (
+            <motion.div
+              key={p.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-card border border-border rounded-2xl p-6 text-center"
+            >
+              <p.icon className="h-10 w-10 text-secondary mx-auto mb-3" />
+              <h3 className="font-display text-xl font-semibold mb-2">{p.title}</h3>
+              <p className="text-foreground/70 font-body text-sm">{p.text}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Open Roles */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-10">Open Positions</h2>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {openRoles.map((role, i) => (
+              <motion.div
+                key={role.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-card border border-border rounded-2xl p-6"
+              >
+                <Briefcase className="h-8 w-8 text-secondary mb-3" />
+                <h3 className="font-display text-xl font-semibold mb-1">{role.title}</h3>
+                <p className="text-secondary text-sm font-medium mb-2">{role.type}</p>
+                <p className="text-foreground/70 font-body text-sm">{role.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Application Form */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4 max-w-2xl">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-3">Apply Now</h2>
+          <p className="text-center text-foreground/70 font-body mb-8">
+            Send us your details and tell us a bit about yourself.
+          </p>
+          <form onSubmit={handleSubmit} className="bg-card border border-border rounded-2xl p-6 md:p-8 space-y-4">
+            <div>
+              <Label htmlFor="full_name">Full Name *</Label>
+              <Input
+                id="full_name"
+                required
+                value={form.full_name}
+                onChange={(e) => setForm({ ...form, full_name: e.target.value })}
+              />
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                />
+              </div>
+              <div>
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                />
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="message">Tell us about yourself & the role you're interested in *</Label>
+              <Textarea
+                id="message"
+                required
+                rows={5}
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+              />
+            </div>
+            <Button type="submit" disabled={loading} className="w-full">
+              <Send className="h-4 w-4 mr-2" />
+              {loading ? "Submitting..." : "Submit Application"}
+            </Button>
+          </form>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Careers;
