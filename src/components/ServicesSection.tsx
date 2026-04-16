@@ -33,8 +33,21 @@ const services: Service[] = [
   },
   {
     icon: Home,
-    title: "Homemaker Services",
-    description: "Light housekeeping, meal preparation, and laundry to keep your home clean and comfortable.",
+    title: "Homemaking Care",
+    description:
+      "We offer household services in order to keep your home a clean and safe place. Our services are available 24 hours a day, seven days a week. Homemaking services are a great option for when you first begin using assistance in the comfort of your home. It includes:",
+    items: [
+      "Meal planning and preparation",
+      "Light housekeeping",
+      "Vacuuming and dusting",
+      "Sweeping and mopping",
+      "Changing bed sheets",
+      "Laundry",
+      "Dishwashing",
+      "Cleaning bathroom and kitchen",
+      "Emptying trash",
+      "Assistance sorting and reading the mail, etc.",
+    ],
   },
   {
     icon: Users,
