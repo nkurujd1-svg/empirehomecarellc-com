@@ -1,16 +1,11 @@
 import { motion } from "framer-motion";
-import { Heart, Home, Clock, Users, Stethoscope, ShieldCheck } from "lucide-react";
+import { Heart, Home, Users } from "lucide-react";
 
 const services = [
   {
     icon: Heart,
     title: "Personal Care",
     description: "Assistance with bathing, grooming, dressing, and daily hygiene to maintain comfort and dignity.",
-  },
-  {
-    icon: Stethoscope,
-    title: "Skilled Nursing",
-    description: "Licensed nurses providing medication management, wound care, and health monitoring at home.",
   },
   {
     icon: Home,
@@ -21,16 +16,6 @@ const services = [
     icon: Users,
     title: "Companion Care",
     description: "Meaningful companionship, conversation, and social engagement to reduce isolation.",
-  },
-  {
-    icon: Clock,
-    title: "Respite Care",
-    description: "Temporary relief for family caregivers so they can rest and recharge while we care for your loved one.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Chronic Disease Management",
-    description: "Specialized support for managing diabetes, heart disease, Alzheimer's, and other conditions.",
   },
 ];
 
