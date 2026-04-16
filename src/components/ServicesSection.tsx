@@ -1,11 +1,35 @@
 import { motion } from "framer-motion";
-import { Heart, Home, Users } from "lucide-react";
+import { Heart, Home, Users, HandHeart } from "lucide-react";
 
-const services = [
+type Service = {
+  icon: typeof Heart;
+  title: string;
+  description: string;
+  items?: string[];
+};
+
+const services: Service[] = [
   {
     icon: Heart,
     title: "Personal Care",
     description: "Assistance with bathing, grooming, dressing, and daily hygiene to maintain comfort and dignity.",
+  },
+  {
+    icon: HandHeart,
+    title: "Personal Assistance",
+    description:
+      "As an experienced provider of personal care programs, we provide support to individuals in the comfort of their homes. Some of the services included in personal assistance are:",
+    items: [
+      "Bathing or showering",
+      "Dressing and grooming",
+      "Hair, skin, and nail care",
+      "Oral hygiene",
+      "Shaving",
+      "Toileting/incontinence care",
+      "Walking and exercise assistance",
+      "Medication reminders",
+      "Feeding",
+    ],
   },
   {
     icon: Home,
