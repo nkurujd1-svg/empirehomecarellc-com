@@ -52,7 +52,17 @@ const services: Service[] = [
   {
     icon: Users,
     title: "Companion Care",
-    description: "Meaningful companionship, conversation, and social engagement to reduce isolation.",
+    description:
+      "Companion care is a special service that we offer. It includes the following activities:",
+    items: [
+      "Accompaniment on errands or to doctor appointments",
+      "Assistance with grocery shopping",
+      "Walking to get fresh air and exercise",
+      "Writing letters",
+      "Playing games",
+      "Reading aloud",
+      "Friendly conversation, etc.",
+    ],
   },
 ];
 
