@@ -70,7 +70,7 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-primary-foreground mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {["Home", "Services", "About", "Testimonials", "Contact"].map((link) => (
+              {["Home", "Services", "About", "Contact"].map((link) => (
                 <li key={link}>
                   <a
                     href={`#${link.toLowerCase()}`}
@@ -86,7 +86,7 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-primary-foreground mb-4">Our Services</h4>
             <ul className="space-y-2">
-              {["Personal Care", "Skilled Nursing", "Companion Care", "Respite Care", "Chronic Disease Mgmt"].map((s) => (
+              {["Personal Care", "Companion Care"].map((s) => (
                 <li key={s}>
                   <span className="text-primary-foreground/60 text-sm font-body">{s}</span>
                 </li>
