@@ -33,7 +33,7 @@ const FacebookIcon = ({ className }: { className?: string }) => (
 
 const Footer = () => {
   return (
-    <footer className="py-16" style={{ backgroundColor: "hsl(140 35% 25%)" }}>
+    <footer className="py-16" style={{ backgroundColor: "hsl(140 40% 45%)" }}>
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           <div>
