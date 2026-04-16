@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
@@ -60,6 +60,16 @@ const ContactSection = () => {
                   </span>
                 </a>
               ))}
+
+              <div className="flex items-start gap-4">
+                <div className="h-12 w-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary flex-shrink-0">
+                  <Clock className="h-5 w-5" />
+                </div>
+                <div className="font-body">
+                  <p className="text-foreground font-semibold">Opening Hours</p>
+                  <p className="text-foreground/80 text-sm mt-0.5">Monday – Friday: 8:00 AM – 5:00 PM</p>
+                </div>
+              </div>
             </div>
           </motion.div>
 
