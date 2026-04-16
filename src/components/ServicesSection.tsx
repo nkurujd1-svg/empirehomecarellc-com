@@ -1,19 +1,14 @@
 import { motion } from "framer-motion";
-import { Heart, Home, Users, HandHeart } from "lucide-react";
+import { Home, Users, HandHeart } from "lucide-react";
 
 type Service = {
-  icon: typeof Heart;
+  icon: typeof Home;
   title: string;
   description: string;
   items?: string[];
 };
 
 const services: Service[] = [
-  {
-    icon: Heart,
-    title: "Personal Care",
-    description: "Assistance with bathing, grooming, dressing, and daily hygiene to maintain comfort and dignity.",
-  },
   {
     icon: HandHeart,
     title: "Personal Assistance",
