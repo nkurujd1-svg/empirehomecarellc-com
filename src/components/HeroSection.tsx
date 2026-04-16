@@ -58,22 +58,6 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Stats bar */}
-      <div className="absolute bottom-0 left-0 right-0 bg-card/95 backdrop-blur-sm border-t border-border">
-        <div className="container mx-auto px-4 py-6 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { value: "10+", label: "Years of Experience" },
-            { value: "500+", label: "Families Served" },
-            { value: "24/7", label: "Care Available" },
-            { value: "100%", label: "Client Satisfaction" },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="text-2xl font-heading font-bold text-secondary">{stat.value}</p>
-              <p className="text-sm text-muted-foreground font-body mt-1">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 };
