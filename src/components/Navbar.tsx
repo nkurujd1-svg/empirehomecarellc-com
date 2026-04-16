@@ -25,7 +25,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
         <Link to="/">
-          <img src={logo} alt="Empire Home Care LLC" className="h-14 w-auto cursor-pointer" />
+          <img src={logo} alt="Empire Home Care LLC" className="h-20 w-auto cursor-pointer" />
         </Link>
 
         <ul className="hidden md:flex items-center gap-8 font-body text-sm font-medium tracking-wide">
