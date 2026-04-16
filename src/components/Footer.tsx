@@ -86,7 +86,7 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-primary-foreground mb-4">Our Services</h4>
             <ul className="space-y-2">
-              {["Personal Care", "Companion Care"].map((s) => (
+              {["Personal Assistance", "Homemaking Care", "Companion Care"].map((s) => (
                 <li key={s}>
                   <span className="text-primary-foreground/60 text-sm font-body">{s}</span>
                 </li>
