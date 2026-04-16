@@ -3,7 +3,7 @@ import { CheckCircle } from "lucide-react";
 
 const values = [
   "Personalized care plans for every client",
-  "Licensed, bonded & insured caregivers",
+  "Licensed & insured caregivers",
   "Available 24 hours a day, 7 days a week",
   "Culturally sensitive and respectful care",
   "Regular communication with families",
@@ -57,18 +57,9 @@ const AboutSection = () => {
             className="relative"
           >
             <div className="bg-secondary/10 rounded-2xl p-10 border border-secondary/20">
-              <div className="grid grid-cols-2 gap-6">
-                {[
-                  { num: "10+", label: "Years Serving Families" },
-                  { num: "50+", label: "Trained Caregivers" },
-                  { num: "98%", label: "Client Retention" },
-                  { num: "500+", label: "Lives Touched" },
-                ].map((s) => (
-                  <div key={s.label} className="text-center p-6 bg-card rounded-xl shadow-sm">
-                    <p className="text-3xl font-heading font-bold text-secondary">{s.num}</p>
-                    <p className="text-xs text-muted-foreground font-body mt-2">{s.label}</p>
-                  </div>
-                ))}
+              <div className="text-center p-6 bg-card rounded-xl shadow-sm">
+                <p className="text-5xl font-heading font-bold text-secondary">98%</p>
+                <p className="text-sm text-muted-foreground font-body mt-2">Client Retention</p>
               </div>
             </div>
           </motion.div>
