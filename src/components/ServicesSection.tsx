@@ -92,6 +92,13 @@ const ServicesSection = () => {
               <p className="text-muted-foreground font-body leading-relaxed text-sm">
                 {service.description}
               </p>
+              {service.items && (
+                <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground font-body list-disc list-inside">
+                  {service.items.map((it) => (
+                    <li key={it}>{it}</li>
+                  ))}
+                </ul>
+              )}
             </motion.div>
           ))}
         </motion.div>
