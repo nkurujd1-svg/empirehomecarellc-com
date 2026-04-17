@@ -16,6 +16,7 @@ import AdminTestimonials from "./pages/AdminTestimonials";
 import AdminSubmissions from "./pages/AdminSubmissions";
 import AdminContent from "./pages/AdminContent";
 import AdminSettings from "./pages/AdminSettings";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
