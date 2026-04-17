@@ -1,0 +1,1 @@
+UPDATE public.hero_slides SET badge_text = NULL WHERE badge_text = 'Available 24/7';
