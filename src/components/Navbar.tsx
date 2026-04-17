@@ -23,12 +23,12 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-md border-b border-border"
     >
-      <div className="container mx-auto flex items-center justify-between py-3 px-4">
-        <Link to="/">
+      <div className="container mx-auto grid grid-cols-[auto_1fr_auto] items-center gap-4 py-3 px-4">
+        <Link to="/" className="justify-self-start">
           <img src={logo} alt="Empire Home Care LLC" className="h-20 w-auto cursor-pointer" />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-8 font-body text-base font-medium tracking-wide">
+        <ul className="hidden md:flex items-center justify-center gap-8 font-body text-base font-medium tracking-wide">
           {navLinks.map((link) => (
             <li key={link.path}>
               <Link
@@ -45,9 +45,15 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden text-foreground">
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden text-foreground justify-self-end"
+          aria-label="Toggle menu"
+        >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
+        {/* Spacer to balance grid on desktop so menu stays centered */}
+        <span className="hidden md:block" aria-hidden="true" />
       </div>
 
       {open && (
