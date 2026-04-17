@@ -14,7 +14,7 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-24 bg-background">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
