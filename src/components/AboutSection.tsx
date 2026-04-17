@@ -56,20 +56,6 @@ const AboutSection = () => {
             </ul>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
-            <div className="bg-secondary/10 rounded-2xl p-10 border border-secondary/20">
-              <div className="text-center p-6 bg-card rounded-xl shadow-sm">
-                <p className="text-5xl font-heading font-bold text-secondary">98%</p>
-                <p className="text-sm text-muted-foreground font-body mt-2">Client Retention</p>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
