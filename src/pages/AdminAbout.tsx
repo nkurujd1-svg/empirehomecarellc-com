@@ -91,7 +91,7 @@ const AdminAbout = () => {
         about_values: content.about_values,
         mission: content.mission,
         vision: content.vision,
-        core_values: content.core_values,
+        core_values: content.core_values as any,
       })
       .eq("id", content.id);
     setSaving(false);
