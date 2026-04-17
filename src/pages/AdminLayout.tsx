@@ -1,20 +1,27 @@
-import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSidebar } from "@/components/AdminSidebar";
 import { useAdmin } from "@/hooks/useAdmin";
 
 const AdminLayout = () => {
-  const { isAdmin, loading } = useAdmin();
+  const { isAdmin, loading, session } = useAdmin();
+  const navigate = useNavigate();
 
-  if (loading) {
+  useEffect(() => {
+    if (loading) return;
+    if (!session || !isAdmin) {
+      navigate("/admin/login", { replace: true });
+    }
+  }, [loading, session, isAdmin, navigate]);
+
+  if (loading || !session || !isAdmin) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-muted-foreground">Loading...</p>
       </div>
     );
   }
-
-  if (!isAdmin) return null;
 
   return (
     <SidebarProvider>
