@@ -14,8 +14,11 @@ import AdminLayout from "./pages/AdminLayout";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminTestimonials from "./pages/AdminTestimonials";
 import AdminSubmissions from "./pages/AdminSubmissions";
-import AdminContent from "./pages/AdminContent";
-import AdminSettings from "./pages/AdminSettings";
+import AdminBranding from "./pages/AdminBranding";
+import AdminSocial from "./pages/AdminSocial";
+import AdminHeroSlides from "./pages/AdminHeroSlides";
+import AdminServices from "./pages/AdminServices";
+import AdminAbout from "./pages/AdminAbout";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -38,8 +41,11 @@ const App = () => (
             <Route index element={<AdminDashboard />} />
             <Route path="testimonials" element={<AdminTestimonials />} />
             <Route path="submissions" element={<AdminSubmissions />} />
-            <Route path="content" element={<AdminContent />} />
-            <Route path="settings" element={<AdminSettings />} />
+            <Route path="branding" element={<AdminBranding />} />
+            <Route path="social" element={<AdminSocial />} />
+            <Route path="hero" element={<AdminHeroSlides />} />
+            <Route path="services" element={<AdminServices />} />
+            <Route path="about" element={<AdminAbout />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
