@@ -1,17 +1,38 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, ArrowRight, RefreshCw } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { useSiteSettings } from "@/hooks/useSiteData";
+
+const generatePuzzle = () => {
+  const a = Math.floor(Math.random() * 9) + 1;
+  const b = Math.floor(Math.random() * 9) + 1;
+  const ops = ["+", "-", "×"] as const;
+  const op = ops[Math.floor(Math.random() * ops.length)];
+  const answer = op === "+" ? a + b : op === "-" ? a - b : a * b;
+  return { a, b, op, answer };
+};
 
 const ContactSection = () => {
   const { data: settings } = useSiteSettings();
   const [formData, setFormData] = useState({ full_name: "", phone: "", email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
+  const [puzzle, setPuzzle] = useState(generatePuzzle);
+  const [puzzleAnswer, setPuzzleAnswer] = useState("");
+
+  const refreshPuzzle = () => {
+    setPuzzle(generatePuzzle());
+    setPuzzleAnswer("");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (parseInt(puzzleAnswer, 10) !== puzzle.answer) {
+      toast({ title: "Incorrect answer", description: "Please solve the math puzzle correctly.", variant: "destructive" });
+      refreshPuzzle();
+      return;
+    }
     setSubmitting(true);
     const { error } = await supabase.from("contact_submissions").insert(formData);
     if (error) {
@@ -19,6 +40,7 @@ const ContactSection = () => {
     } else {
       toast({ title: "Sent!", description: "We'll get back to you soon." });
       setFormData({ full_name: "", phone: "", email: "", message: "" });
+      refreshPuzzle();
     }
     setSubmitting(false);
   };
@@ -119,6 +141,29 @@ const ContactSection = () => {
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1.5 font-body">How Can We Help?</label>
                 <textarea rows={4} required value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Tell us about your care needs..." className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1.5 font-body">
+                  Spam check: What is {puzzle.a} {puzzle.op} {puzzle.b}?
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    required
+                    value={puzzleAnswer}
+                    onChange={(e) => setPuzzleAnswer(e.target.value)}
+                    placeholder="Your answer"
+                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  />
+                  <button
+                    type="button"
+                    onClick={refreshPuzzle}
+                    aria-label="New puzzle"
+                    className="rounded-lg border border-input bg-background px-3 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                  >
+                    <RefreshCw className="h-4 w-4" />
+                  </button>
+                </div>
               </div>
               <button type="submit" disabled={submitting} className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-7 py-3.5 text-base font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors disabled:opacity-50">
                 {submitting ? "Sending..." : "Request Free Consultation"}
