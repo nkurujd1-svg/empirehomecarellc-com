@@ -1,65 +1,6 @@
 import { motion } from "framer-motion";
-import { Home, Users, HandHeart } from "lucide-react";
-
-type Service = {
-  icon: typeof Home;
-  title: string;
-  description: string;
-  items?: string[];
-};
-
-const services: Service[] = [
-  {
-    icon: HandHeart,
-    title: "Personal Assistance",
-    description:
-      "As an experienced provider of personal care programs, we provide support to individuals in the comfort of their homes. Some of the services included in personal assistance are:",
-    items: [
-      "Bathing or showering",
-      "Dressing and grooming",
-      "Hair, skin, and nail care",
-      "Oral hygiene",
-      "Shaving",
-      "Toileting/incontinence care",
-      "Walking and exercise assistance",
-      "Medication reminders",
-      "Feeding",
-    ],
-  },
-  {
-    icon: Home,
-    title: "Homemaking Care",
-    description:
-      "We offer household services in order to keep your home a clean and safe place. Our services are available 24 hours a day, seven days a week. Homemaking services are a great option for when you first begin using assistance in the comfort of your home. It includes:",
-    items: [
-      "Meal planning and preparation",
-      "Light housekeeping",
-      "Vacuuming and dusting",
-      "Sweeping and mopping",
-      "Changing bed sheets",
-      "Laundry",
-      "Dishwashing",
-      "Cleaning bathroom and kitchen",
-      "Emptying trash",
-      "Assistance sorting and reading the mail, etc.",
-    ],
-  },
-  {
-    icon: Users,
-    title: "Companion Care",
-    description:
-      "Companion care is a special service that we offer. It includes the following activities:",
-    items: [
-      "Accompaniment on errands or to doctor appointments",
-      "Assistance with grocery shopping",
-      "Walking to get fresh air and exercise",
-      "Writing letters",
-      "Playing games",
-      "Reading aloud",
-      "Friendly conversation, etc.",
-    ],
-  },
-];
+import { useServices } from "@/hooks/useSiteData";
+import { getIcon } from "@/lib/iconMap";
 
 const container = {
   hidden: {},
@@ -72,6 +13,8 @@ const item = {
 };
 
 const ServicesSection = () => {
+  const { data: services } = useServices();
+
   return (
     <section id="services" className="py-24 bg-warm">
       <div className="container mx-auto px-4">
@@ -95,30 +38,34 @@ const ServicesSection = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {services.map((service) => (
-            <motion.div
-              key={service.title}
-              variants={item}
-              className="group bg-card rounded-xl p-8 shadow-sm border border-border hover:shadow-lg hover:border-secondary/30 transition-all duration-300"
-            >
-              <div className="inline-flex items-center justify-center h-14 w-14 rounded-xl bg-secondary/10 text-secondary mb-5 group-hover:bg-secondary group-hover:text-secondary-foreground transition-colors">
-                <service.icon className="h-7 w-7" />
-              </div>
-              <h3 className="font-heading text-xl font-semibold text-card-foreground mb-3">
-                {service.title}
-              </h3>
-              <p className="text-muted-foreground font-body leading-relaxed text-sm">
-                {service.description}
-              </p>
-              {service.items && (
-                <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground font-body list-disc list-inside">
-                  {service.items.map((it) => (
-                    <li key={it}>{it}</li>
-                  ))}
-                </ul>
-              )}
-            </motion.div>
-          ))}
+          {services.map((service) => {
+            const Icon = getIcon(service.icon);
+            const items = (service.items as string[] | null) ?? [];
+            return (
+              <motion.div
+                key={service.id}
+                variants={item}
+                className="group bg-card rounded-xl p-8 shadow-sm border border-border hover:shadow-lg hover:border-secondary/30 transition-all duration-300"
+              >
+                <div className="inline-flex items-center justify-center h-14 w-14 rounded-xl bg-secondary/10 text-secondary mb-5 group-hover:bg-secondary group-hover:text-secondary-foreground transition-colors">
+                  <Icon className="h-7 w-7" />
+                </div>
+                <h3 className="font-heading text-xl font-semibold text-card-foreground mb-3">
+                  {service.title}
+                </h3>
+                <p className="text-muted-foreground font-body leading-relaxed text-sm">
+                  {service.full_description || service.short_description}
+                </p>
+                {items.length > 0 && (
+                  <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground font-body list-disc list-inside">
+                    {items.map((it) => (
+                      <li key={it}>{it}</li>
+                    ))}
+                  </ul>
+                )}
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

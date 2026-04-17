@@ -3,8 +3,10 @@ import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { useSiteSettings } from "@/hooks/useSiteData";
 
 const ContactSection = () => {
+  const { data: settings } = useSiteSettings();
   const [formData, setFormData] = useState({ full_name: "", phone: "", email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
 
@@ -20,6 +22,27 @@ const ContactSection = () => {
     }
     setSubmitting(false);
   };
+
+  const contacts = [
+    settings?.phone && {
+      icon: Phone,
+      label: settings.phone,
+      href: settings.phone_href || `tel:${settings.phone.replace(/[^+\d]/g, "")}`,
+    },
+    settings?.email && {
+      icon: Mail,
+      label: settings.email,
+      href: `mailto:${settings.email}`,
+    },
+    settings?.address && {
+      icon: MapPin,
+      label: settings.address,
+      href:
+        settings.address_map_url ||
+        `https://maps.google.com/?q=${encodeURIComponent(settings.address)}`,
+    },
+  ].filter(Boolean) as { icon: typeof Phone; label: string; href: string }[];
+
   return (
     <section id="contact" className="py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -42,16 +65,8 @@ const ContactSection = () => {
             </p>
 
             <div className="space-y-6">
-              {[
-                { icon: Phone, label: "(605) 321-8915", href: "tel:+16053218915" },
-                { icon: Mail, label: "info@empirehomecarellc.com", href: "mailto:info@empirehomecarellc.com" },
-                { icon: MapPin, label: "707 W 11th St, Sioux Falls, SD 57104", href: "https://maps.google.com/?q=707+W+11th+St+Sioux+Falls+SD+57104" },
-              ].map((c) => (
-                <a
-                  key={c.label}
-                  href={c.href}
-                  className="flex items-center gap-4 group"
-                >
+              {contacts.map((c) => (
+                <a key={c.label} href={c.href} className="flex items-center gap-4 group">
                   <div className="h-12 w-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-secondary-foreground transition-colors">
                     <c.icon className="h-5 w-5" />
                   </div>
@@ -61,15 +76,19 @@ const ContactSection = () => {
                 </a>
               ))}
 
-              <div className="flex items-start gap-4">
-                <div className="h-12 w-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary flex-shrink-0">
-                  <Clock className="h-5 w-5" />
+              {settings?.opening_hours && (
+                <div className="flex items-start gap-4">
+                  <div className="h-12 w-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary flex-shrink-0">
+                    <Clock className="h-5 w-5" />
+                  </div>
+                  <div className="font-body">
+                    <p className="text-foreground font-semibold">Opening Hours</p>
+                    <p className="text-foreground/80 text-sm mt-0.5 whitespace-pre-line">
+                      {settings.opening_hours}
+                    </p>
+                  </div>
                 </div>
-                <div className="font-body">
-                  <p className="text-foreground font-semibold">Opening Hours</p>
-                  <p className="text-foreground/80 text-sm mt-0.5">Monday – Friday: 8:00 AM – 5:00 PM</p>
-                </div>
-              </div>
+              )}
             </div>
           </motion.div>
 
@@ -86,7 +105,7 @@ const ContactSection = () => {
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-1.5 font-body">Full Name</label>
-                  <input type="text" required value={formData.full_name} onChange={(e) => setFormData({ ...formData, full_name: e.target.value })} placeholder="Chance" className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
+                  <input type="text" required value={formData.full_name} onChange={(e) => setFormData({ ...formData, full_name: e.target.value })} placeholder="Your name" className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-1.5 font-body">Phone</label>

@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
-
-const values = [
-  "Personalized care plans for every client",
-  "Licensed & insured caregivers",
-  "Available 24 hours a day, 7 days a week",
-  "Culturally sensitive and respectful care",
-  "Regular communication with families",
-  "Ongoing caregiver training & supervision",
-];
+import { useAboutContent } from "@/hooks/useSiteData";
 
 const AboutSection = () => {
+  const { data } = useAboutContent();
+  const heading = data?.about_heading || "Caring for Your Family";
+  const accent = data?.about_heading_accent || "Like Our Own";
+  const p1 = data?.about_paragraph_1 || "";
+  const p2 = data?.about_paragraph_2 || "";
+  const p3 = data?.about_paragraph_3 || "";
+  const values = (data?.about_values as string[] | null) ?? [];
+
   return (
     <section id="about" className="py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -25,37 +25,23 @@ const AboutSection = () => {
               About Us
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mt-3 mb-6">
-              Caring for Your Family{" "}
-              <span className="text-secondary">Like Our Own</span>
+              {heading} {accent && <span className="text-secondary">{accent}</span>}
             </h2>
-            <p className="text-muted-foreground font-body leading-relaxed mb-6">
-              At Empire Home Care LLC, we believe that everyone deserves high-quality,
-              compassionate care in the comfort of their own home. Our team of dedicated
-              professionals is committed to enhancing the quality of life for seniors and
-              individuals with special needs.
-            </p>
-            <p className="text-muted-foreground font-body leading-relaxed mb-6">
-              At Empire Home Care, we are dedicated to providing compassionate, high-quality
-              care that allows individuals to remain safe, comfortable, and independent in
-              the place they call home. We understand that every client has unique needs,
-              which is why we offer personalized care plans tailored to support each
-              individual's lifestyle, health, and well-being.
-            </p>
-            <p className="text-muted-foreground font-body leading-relaxed mb-8">
-              Founded on the principles of empathy, integrity, and excellence, we go
-              beyond the basics to create meaningful connections with every client we serve.
-            </p>
+            {p1 && <p className="text-muted-foreground font-body leading-relaxed mb-6">{p1}</p>}
+            {p2 && <p className="text-muted-foreground font-body leading-relaxed mb-6">{p2}</p>}
+            {p3 && <p className="text-muted-foreground font-body leading-relaxed mb-8">{p3}</p>}
 
-            <ul className="space-y-3">
-              {values.map((v) => (
-                <li key={v} className="flex items-start gap-3">
-                  <CheckCircle className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground/80 font-body text-sm">{v}</span>
-                </li>
-              ))}
-            </ul>
+            {values.length > 0 && (
+              <ul className="space-y-3">
+                {values.map((v) => (
+                  <li key={v} className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
+                    <span className="text-foreground/80 font-body text-sm">{v}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </motion.div>
-
         </div>
       </div>
     </section>

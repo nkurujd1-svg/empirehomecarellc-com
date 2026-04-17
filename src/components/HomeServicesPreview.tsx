@@ -1,33 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import personalCare from "@/assets/service-personal-care.jpg";
-import homemaking from "@/assets/service-homemaking.jpg";
-import companion from "@/assets/service-companion.jpg";
-
-const services = [
-  {
-    title: "Personal Assistance",
-    description:
-      "Compassionate, hands-on support with bathing, dressing, grooming, mobility, and medication reminders — preserving dignity in every detail.",
-    image: personalCare,
-    alt: "Caregiver assisting an elderly woman",
-  },
-  {
-    title: "Homemaking Care",
-    description:
-      "Light housekeeping, meal preparation, laundry and errands — keeping your loved one's home safe, clean and comfortable, 24/7.",
-    image: homemaking,
-    alt: "Caregiver preparing a fresh meal in a sunny kitchen",
-  },
-  {
-    title: "Companion Care",
-    description:
-      "Friendly conversation, walks, games, appointment escorts and meaningful connection that brightens every day.",
-    image: companion,
-    alt: "Caregiver and senior man enjoying tea together",
-  },
-];
+import { useServices } from "@/hooks/useSiteData";
+import { getIcon } from "@/lib/iconMap";
+import personalCareFallback from "@/assets/service-personal-care.jpg";
 
 const container = {
   hidden: {},
@@ -40,6 +16,8 @@ const item = {
 };
 
 const HomeServicesPreview = () => {
+  const { data: services } = useServices({ featuredOnly: true });
+
   return (
     <section className="py-20 lg:py-28 bg-warm">
       <div className="container mx-auto px-4 max-w-[1200px]">
@@ -63,41 +41,48 @@ const HomeServicesPreview = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7"
         >
-          {services.map((service) => (
-            <motion.article
-              key={service.title}
-              variants={item}
-              className="group bg-card rounded-2xl overflow-hidden shadow-sm border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
-            >
-              <div className="relative h-52 overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={service.alt}
-                  width={1024}
-                  height={768}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-primary/0 to-transparent" />
-              </div>
+          {services.map((service) => {
+            const Icon = getIcon(service.icon);
+            const image = service.image_url || personalCareFallback;
+            return (
+              <motion.article
+                key={service.id}
+                variants={item}
+                className="group bg-card rounded-2xl overflow-hidden shadow-sm border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
+              >
+                <div className="relative h-52 overflow-hidden">
+                  <img
+                    src={image}
+                    alt={service.title}
+                    width={1024}
+                    height={768}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-primary/0 to-transparent" />
+                  <div className="absolute top-3 left-3 inline-flex items-center justify-center h-10 w-10 rounded-xl bg-card/90 text-secondary backdrop-blur-sm">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                </div>
 
-              <div className="p-6 flex flex-col flex-1">
-                <h3 className="font-heading text-xl font-semibold text-card-foreground mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground font-body leading-relaxed text-sm mb-5 flex-1">
-                  {service.description}
-                </p>
-                <Link
-                  to="/services"
-                  className="inline-flex items-center gap-1.5 text-secondary font-semibold text-sm hover:gap-2.5 transition-all"
-                >
-                  Learn more
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </motion.article>
-          ))}
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="font-heading text-xl font-semibold text-card-foreground mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-muted-foreground font-body leading-relaxed text-sm mb-5 flex-1">
+                    {service.short_description}
+                  </p>
+                  <Link
+                    to="/services"
+                    className="inline-flex items-center gap-1.5 text-secondary font-semibold text-sm hover:gap-2.5 transition-all"
+                  >
+                    Learn more
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </motion.article>
+            );
+          })}
         </motion.div>
 
         <div className="text-center mt-12">
