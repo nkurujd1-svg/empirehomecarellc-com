@@ -34,6 +34,13 @@ const AboutSection = () => {
               professionals is committed to enhancing the quality of life for seniors and
               individuals with special needs.
             </p>
+            <p className="text-muted-foreground font-body leading-relaxed mb-6">
+              At Empire Home Care, we are dedicated to providing compassionate, high-quality
+              care that allows individuals to remain safe, comfortable, and independent in
+              the place they call home. We understand that every client has unique needs,
+              which is why we offer personalized care plans tailored to support each
+              individual's lifestyle, health, and well-being.
+            </p>
             <p className="text-muted-foreground font-body leading-relaxed mb-8">
               Founded on the principles of empathy, integrity, and excellence, we go
               beyond the basics to create meaningful connections with every client we serve.
