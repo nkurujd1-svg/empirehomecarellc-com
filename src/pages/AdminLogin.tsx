@@ -10,7 +10,8 @@ import { Mail, Sparkles, CheckCircle2 } from "lucide-react";
 import logo from "@/assets/empire-home-care-logo.png";
 
 const AdminLogin = () => {
-  const [email, setEmail] = useState("");
+  const ADMIN_EMAIL = "info@empirehomecarellc.com";
+  const [email, setEmail] = useState(ADMIN_EMAIL);
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const navigate = useNavigate();
