@@ -28,7 +28,7 @@ const Navbar = () => {
           <img src={logo} alt="Empire Home Care LLC" className="h-20 w-auto cursor-pointer" />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-8 font-body text-sm font-medium tracking-wide">
+        <ul className="hidden md:flex items-center gap-8 font-body text-base font-medium tracking-wide">
           {navLinks.map((link) => (
             <li key={link.path}>
               <Link
