@@ -2,7 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "@/assets/empire-home-care-logo.png";
+import logoFallback from "@/assets/empire-home-care-logo.png";
+import { useSiteSettings } from "@/hooks/useSiteData";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -15,6 +16,9 @@ const navLinks = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const { data: settings } = useSiteSettings();
+  const logo = settings?.logo_url || logoFallback;
+  const businessName = settings?.business_name || "Empire Home Care LLC";
 
   return (
     <motion.nav
@@ -25,7 +29,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto grid grid-cols-[auto_1fr_auto] items-center gap-4 py-3 px-4">
         <Link to="/" className="justify-self-start">
-          <img src={logo} alt="Empire Home Care LLC" className="h-20 w-auto cursor-pointer" />
+          <img src={logo} alt={businessName} className="h-20 w-auto cursor-pointer object-contain" />
         </Link>
 
         <ul className="hidden md:flex items-center justify-center gap-8 font-body text-base font-medium tracking-wide">
@@ -52,7 +56,6 @@ const Navbar = () => {
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
-        {/* Spacer to balance grid on desktop so menu stays centered */}
         <span className="hidden md:block" aria-hidden="true" />
       </div>
 
