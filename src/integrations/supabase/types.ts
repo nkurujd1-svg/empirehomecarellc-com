@@ -14,6 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
+      about_content: {
+        Row: {
+          about_heading: string | null
+          about_heading_accent: string | null
+          about_paragraph_1: string | null
+          about_paragraph_2: string | null
+          about_paragraph_3: string | null
+          about_values: Json
+          core_values: Json
+          created_at: string
+          id: string
+          mission: string | null
+          preview_badge_label: string | null
+          preview_badge_value: string | null
+          preview_heading: string | null
+          preview_heading_accent: string | null
+          preview_highlights: Json
+          preview_image_url: string | null
+          preview_paragraph_1: string | null
+          preview_paragraph_2: string | null
+          updated_at: string
+          vision: string | null
+        }
+        Insert: {
+          about_heading?: string | null
+          about_heading_accent?: string | null
+          about_paragraph_1?: string | null
+          about_paragraph_2?: string | null
+          about_paragraph_3?: string | null
+          about_values?: Json
+          core_values?: Json
+          created_at?: string
+          id?: string
+          mission?: string | null
+          preview_badge_label?: string | null
+          preview_badge_value?: string | null
+          preview_heading?: string | null
+          preview_heading_accent?: string | null
+          preview_highlights?: Json
+          preview_image_url?: string | null
+          preview_paragraph_1?: string | null
+          preview_paragraph_2?: string | null
+          updated_at?: string
+          vision?: string | null
+        }
+        Update: {
+          about_heading?: string | null
+          about_heading_accent?: string | null
+          about_paragraph_1?: string | null
+          about_paragraph_2?: string | null
+          about_paragraph_3?: string | null
+          about_values?: Json
+          core_values?: Json
+          created_at?: string
+          id?: string
+          mission?: string | null
+          preview_badge_label?: string | null
+          preview_badge_value?: string | null
+          preview_heading?: string | null
+          preview_heading_accent?: string | null
+          preview_highlights?: Json
+          preview_image_url?: string | null
+          preview_paragraph_1?: string | null
+          preview_paragraph_2?: string | null
+          updated_at?: string
+          vision?: string | null
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
@@ -44,6 +113,102 @@ export type Database = {
         }
         Relationships: []
       }
+      hero_slides: {
+        Row: {
+          badge_text: string | null
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          is_visible: boolean
+          primary_cta_label: string | null
+          primary_cta_url: string | null
+          secondary_cta_label: string | null
+          secondary_cta_url: string | null
+          sort_order: number
+          title: string
+          title_accent: string | null
+          updated_at: string
+        }
+        Insert: {
+          badge_text?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_visible?: boolean
+          primary_cta_label?: string | null
+          primary_cta_url?: string | null
+          secondary_cta_label?: string | null
+          secondary_cta_url?: string | null
+          sort_order?: number
+          title: string
+          title_accent?: string | null
+          updated_at?: string
+        }
+        Update: {
+          badge_text?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_visible?: boolean
+          primary_cta_label?: string | null
+          primary_cta_url?: string | null
+          secondary_cta_label?: string | null
+          secondary_cta_url?: string | null
+          sort_order?: number
+          title?: string
+          title_accent?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          created_at: string
+          full_description: string | null
+          icon: string
+          id: string
+          image_url: string | null
+          is_featured: boolean
+          is_visible: boolean
+          items: Json
+          short_description: string | null
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          full_description?: string | null
+          icon?: string
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean
+          is_visible?: boolean
+          items?: Json
+          short_description?: string | null
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          full_description?: string | null
+          icon?: string
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean
+          is_visible?: boolean
+          items?: Json
+          short_description?: string | null
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       site_content: {
         Row: {
           id: string
@@ -65,6 +230,84 @@ export type Database = {
           section?: string
           updated_at?: string
           value?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          address: string | null
+          address_map_url: string | null
+          business_name: string
+          created_at: string
+          email: string | null
+          footer_about: string | null
+          id: string
+          logo_url: string | null
+          opening_hours: string | null
+          phone: string | null
+          phone_href: string | null
+          tagline: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          address_map_url?: string | null
+          business_name?: string
+          created_at?: string
+          email?: string | null
+          footer_about?: string | null
+          id?: string
+          logo_url?: string | null
+          opening_hours?: string | null
+          phone?: string | null
+          phone_href?: string | null
+          tagline?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          address_map_url?: string | null
+          business_name?: string
+          created_at?: string
+          email?: string | null
+          footer_about?: string | null
+          id?: string
+          logo_url?: string | null
+          opening_hours?: string | null
+          phone?: string | null
+          phone_href?: string | null
+          tagline?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      social_links: {
+        Row: {
+          created_at: string
+          id: string
+          is_visible: boolean
+          platform: string
+          sort_order: number
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_visible?: boolean
+          platform: string
+          sort_order?: number
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_visible?: boolean
+          platform?: string
+          sort_order?: number
+          updated_at?: string
+          url?: string
         }
         Relationships: []
       }
