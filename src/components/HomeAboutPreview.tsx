@@ -37,17 +37,6 @@ const HomeAboutPreview = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none" />
             </div>
-            {(badgeValue || badgeLabel) && (
-              <div className="hidden sm:flex absolute -bottom-6 -right-6 lg:right-auto lg:-left-6 bg-card border border-border shadow-xl rounded-2xl p-5 max-w-[220px] items-center gap-3">
-                <div className="h-12 w-12 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center flex-shrink-0">
-                  <Heart className="h-6 w-6" />
-                </div>
-                <div>
-                  <p className="font-heading font-bold text-2xl text-foreground leading-none">{badgeValue}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{badgeLabel}</p>
-                </div>
-              </div>
-            )}
           </motion.div>
 
           <motion.div
