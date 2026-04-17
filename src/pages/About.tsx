@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import AboutSection from "@/components/AboutSection";
+import MissionVisionValues from "@/components/MissionVisionValues";
 import Footer from "@/components/Footer";
 
 const About = () => (
@@ -7,6 +8,7 @@ const About = () => (
     <Navbar />
     <div className="pt-20">
       <AboutSection />
+      <MissionVisionValues />
     </div>
     <Footer />
   </div>
