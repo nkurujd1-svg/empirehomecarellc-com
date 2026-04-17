@@ -142,6 +142,29 @@ const ContactSection = () => {
                 <label className="block text-sm font-medium text-foreground mb-1.5 font-body">How Can We Help?</label>
                 <textarea rows={4} required value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Tell us about your care needs..." className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1.5 font-body">
+                  Spam check: What is {puzzle.a} {puzzle.op} {puzzle.b}?
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    required
+                    value={puzzleAnswer}
+                    onChange={(e) => setPuzzleAnswer(e.target.value)}
+                    placeholder="Your answer"
+                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  />
+                  <button
+                    type="button"
+                    onClick={refreshPuzzle}
+                    aria-label="New puzzle"
+                    className="rounded-lg border border-input bg-background px-3 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                  >
+                    <RefreshCw className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
               <button type="submit" disabled={submitting} className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-7 py-3.5 text-base font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors disabled:opacity-50">
                 {submitting ? "Sending..." : "Request Free Consultation"}
                 <ArrowRight className="h-5 w-5" />
