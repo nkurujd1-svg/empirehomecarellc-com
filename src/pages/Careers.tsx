@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Heart, Users, Send } from "lucide-react";
+import { Briefcase, Heart, Users, Send, Upload, FileText, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -10,24 +10,6 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
-const openRoles = [
-  {
-    title: "Personal Care Aide",
-    type: "Full-time / Part-time",
-    description: "Provide compassionate personal assistance to clients in their homes.",
-  },
-  {
-    title: "Home Health Aide",
-    type: "Full-time",
-    description: "Support clients with daily living activities and basic health monitoring.",
-  },
-  {
-    title: "Companion Caregiver",
-    type: "Part-time",
-    description: "Offer companionship, light housekeeping, and meal preparation.",
-  },
-];
-
 const perks = [
   { icon: Heart, title: "Meaningful Work", text: "Make a real difference in clients' lives every day." },
   { icon: Users, title: "Supportive Team", text: "Join a caring, professional, and welcoming team." },
@@ -35,24 +17,64 @@ const perks = [
 ];
 
 const Careers = () => {
-  const [form, setForm] = useState({ full_name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ full_name: "", email: "", phone: "", position: "", message: "" });
+  const [resume, setResume] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const ALLOWED_TYPES = [
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ];
+  const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+
+  const handleFile = (file: File | null) => {
+    if (!file) return setResume(null);
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      toast.error("Please upload a PDF or Word document.");
+      return;
+    }
+    if (file.size > MAX_SIZE) {
+      toast.error("Resume must be under 10MB.");
+      return;
+    }
+    setResume(file);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    let resume_url: string | null = null;
+    if (resume) {
+      const ext = resume.name.split(".").pop();
+      const path = `${Date.now()}-${crypto.randomUUID()}.${ext}`;
+      const { error: upErr } = await supabase.storage.from("resumes").upload(path, resume, {
+        contentType: resume.type,
+        upsert: false,
+      });
+      if (upErr) {
+        setLoading(false);
+        toast.error("Could not upload resume. Please try again.");
+        return;
+      }
+      resume_url = path;
+    }
+
     const { error } = await supabase.from("contact_submissions").insert({
       full_name: form.full_name,
       email: form.email || null,
       phone: form.phone || null,
-      message: `[CAREER APPLICATION] ${form.message}`,
+      message: `[CAREER APPLICATION${form.position ? ` — ${form.position}` : ""}] ${form.message}`,
+      resume_url,
     });
     setLoading(false);
     if (error) {
       toast.error("Something went wrong. Please try again.");
     } else {
       toast.success("Application submitted! We'll be in touch soon.");
-      setForm({ full_name: "", email: "", phone: "", message: "" });
+      setForm({ full_name: "", email: "", phone: "", position: "", message: "" });
+      setResume(null);
     }
   };
 
@@ -101,36 +123,12 @@ const Careers = () => {
         </div>
       </section>
 
-      {/* Open Roles */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-10">Open Positions</h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {openRoles.map((role, i) => (
-              <motion.div
-                key={role.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-card border border-border rounded-2xl p-6"
-              >
-                <Briefcase className="h-8 w-8 text-secondary mb-3" />
-                <h3 className="font-display text-xl font-semibold mb-1">{role.title}</h3>
-                <p className="text-secondary text-sm font-medium mb-2">{role.type}</p>
-                <p className="text-foreground/70 font-body text-sm">{role.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Application Form */}
-      <section className="py-16 bg-background">
+      <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 max-w-2xl">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-3">Apply Now</h2>
           <p className="text-center text-foreground/70 font-body mb-8">
-            Send us your details and tell us a bit about yourself.
+            Send us your details, attach your resume, and tell us a bit about yourself.
           </p>
           <form onSubmit={handleSubmit} className="bg-card border border-border rounded-2xl p-6 md:p-8 space-y-4">
             <div>
@@ -163,7 +161,51 @@ const Careers = () => {
               </div>
             </div>
             <div>
-              <Label htmlFor="message">Tell us about yourself & the role you're interested in *</Label>
+              <Label htmlFor="position">Position you're applying for</Label>
+              <Input
+                id="position"
+                placeholder="e.g. Personal Care Aide"
+                value={form.position}
+                onChange={(e) => setForm({ ...form, position: e.target.value })}
+              />
+            </div>
+            <div>
+              <Label htmlFor="resume">Resume (PDF or Word, max 10MB)</Label>
+              {resume ? (
+                <div className="mt-1 flex items-center justify-between gap-3 rounded-lg border border-border bg-background px-3 py-2.5">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <FileText className="h-4 w-4 text-secondary shrink-0" />
+                    <span className="text-sm truncate">{resume.name}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setResume(null)}
+                    className="text-foreground/60 hover:text-foreground"
+                    aria-label="Remove resume"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              ) : (
+                <label
+                  htmlFor="resume"
+                  className="mt-1 flex flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-border bg-background px-4 py-6 cursor-pointer hover:border-secondary/60 hover:bg-secondary/5 transition-colors"
+                >
+                  <Upload className="h-5 w-5 text-secondary" />
+                  <span className="text-sm font-medium">Click to upload your resume</span>
+                  <span className="text-xs text-foreground/60">PDF, DOC, or DOCX up to 10MB</span>
+                </label>
+              )}
+              <Input
+                id="resume"
+                type="file"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                className="hidden"
+                onChange={(e) => handleFile(e.target.files?.[0] ?? null)}
+              />
+            </div>
+            <div>
+              <Label htmlFor="message">Tell us about yourself *</Label>
               <Textarea
                 id="message"
                 required
