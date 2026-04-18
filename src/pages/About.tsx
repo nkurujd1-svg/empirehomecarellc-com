@@ -11,7 +11,7 @@ const About = () => (
     {/* Hero with ocean marquee pan */}
     <section className="relative pt-32 pb-20 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="flex h-full w-[200%] animate-marquee-x will-change-transform">
+        <div className="flex h-full w-[200%] animate-marquee-x will-change-transform min-w-[200vw]">
           <img
             src={oceanBg}
             alt="Calm ocean at golden hour"
