@@ -1,0 +1,1 @@
+UPDATE public.about_content SET preview_image_url = 'https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/about/sunrise.jpg', updated_at = now();
