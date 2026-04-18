@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import forestBg from "@/assets/careers-forest.jpg";
 
 const perks = [
   { icon: Heart, title: "Meaningful Work", text: "Make a real difference in clients' lives every day." },
@@ -82,13 +83,21 @@ const Careers = () => {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-primary/10 via-background to-secondary/10">
-        <div className="container mx-auto px-4 text-center">
+      {/* Hero with forest background */}
+      <section className="relative pt-32 pb-20 overflow-hidden">
+        <img
+          src={forestBg}
+          alt="Lush green forest"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/70 via-emerald-900/60 to-background" />
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-4xl md:text-6xl font-bold text-foreground mb-4"
+            className="font-display text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg"
           >
             Join Our Caring Team
           </motion.h1>
@@ -96,7 +105,7 @@ const Careers = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-body text-lg text-foreground/70 max-w-2xl mx-auto"
+            className="font-body text-lg text-white/90 max-w-2xl mx-auto drop-shadow"
           >
             Build a rewarding career with Empire Home Care LLC — where compassion meets opportunity.
           </motion.p>
