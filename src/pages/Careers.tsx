@@ -83,15 +83,27 @@ const Careers = () => {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* Hero with Sioux Falls cityscape background */}
+      {/* Hero with Sioux Falls cityscape — marquee pan */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <img
-          src={cityBg}
-          alt="Sioux Falls, South Dakota cityscape"
-          width={1920}
-          height={1080}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="flex h-full w-[200%] animate-marquee-x will-change-transform">
+            <img
+              src={cityBg}
+              alt="Sioux Falls, South Dakota cityscape"
+              width={1920}
+              height={1080}
+              className="h-full w-1/2 object-cover shrink-0"
+            />
+            <img
+              src={cityBg}
+              alt=""
+              aria-hidden="true"
+              width={1920}
+              height={1080}
+              className="h-full w-1/2 object-cover shrink-0"
+            />
+          </div>
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/55 via-slate-900/35 to-slate-950/65" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h1
