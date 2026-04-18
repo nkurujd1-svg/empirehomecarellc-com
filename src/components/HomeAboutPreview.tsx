@@ -26,15 +26,26 @@ const HomeAboutPreview = () => {
             transition={{ duration: 0.7 }}
             className="relative order-2 lg:order-1"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src={image}
-                alt={heading}
-                width={1024}
-                height={1280}
-                loading="lazy"
-                className="w-full h-[420px] sm:h-[520px] object-cover"
-              />
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl h-[420px] sm:h-[520px]">
+              <div className="absolute inset-0 flex w-[200%] animate-marquee-x will-change-transform min-w-[200%]">
+                <img
+                  src={image}
+                  alt={heading}
+                  width={1024}
+                  height={1280}
+                  loading="lazy"
+                  className="h-full w-1/2 object-cover shrink-0"
+                />
+                <img
+                  src={image}
+                  alt=""
+                  aria-hidden="true"
+                  width={1024}
+                  height={1280}
+                  loading="lazy"
+                  className="h-full w-1/2 object-cover shrink-0"
+                />
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none" />
             </div>
           </motion.div>
