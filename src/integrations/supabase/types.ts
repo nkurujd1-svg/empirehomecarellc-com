@@ -92,6 +92,7 @@ export type Database = {
           is_read: boolean
           message: string
           phone: string | null
+          resume_url: string | null
         }
         Insert: {
           created_at?: string
@@ -101,6 +102,7 @@ export type Database = {
           is_read?: boolean
           message: string
           phone?: string | null
+          resume_url?: string | null
         }
         Update: {
           created_at?: string
@@ -110,6 +112,7 @@ export type Database = {
           is_read?: boolean
           message?: string
           phone?: string | null
+          resume_url?: string | null
         }
         Relationships: []
       }
