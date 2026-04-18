@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useServices } from "@/hooks/useSiteData";
 import { getIcon } from "@/lib/iconMap";
-import personalCareFallback from "@/assets/service-personal-care.jpg";
 
 const container = {
   hidden: {},
@@ -43,29 +42,16 @@ const HomeServicesPreview = () => {
         >
           {services.map((service) => {
             const Icon = getIcon(service.icon);
-            const image = service.image_url || personalCareFallback;
             return (
               <motion.article
                 key={service.id}
                 variants={item}
                 className="group bg-card rounded-2xl overflow-hidden shadow-sm border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
               >
-                <div className="relative h-52 overflow-hidden">
-                  <img
-                    src={image}
-                    alt={service.title}
-                    width={1024}
-                    height={768}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-primary/0 to-transparent" />
-                  <div className="absolute top-3 left-3 inline-flex items-center justify-center h-10 w-10 rounded-xl bg-card/90 text-secondary backdrop-blur-sm">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                </div>
-
                 <div className="p-6 flex flex-col flex-1">
+                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-secondary/10 text-secondary mb-4">
+                    <Icon className="h-6 w-6" />
+                  </div>
                   <h3 className="font-heading text-xl font-semibold text-card-foreground mb-3">
                     {service.title}
                   </h3>
