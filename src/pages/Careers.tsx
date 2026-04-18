@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import forestBg from "@/assets/careers-forest.jpg";
+import cityBg from "@/assets/careers-city.jpg";
 
 const perks = [
   { icon: Heart, title: "Meaningful Work", text: "Make a real difference in clients' lives every day." },
@@ -83,16 +83,16 @@ const Careers = () => {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* Hero with forest background */}
+      {/* Hero with Sioux Falls cityscape background */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <img
-          src={forestBg}
-          alt="Lush green forest"
+          src={cityBg}
+          alt="Sioux Falls, South Dakota cityscape"
           width={1920}
           height={1080}
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/60 via-emerald-900/30 to-emerald-950/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/55 via-slate-900/35 to-slate-950/65" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
