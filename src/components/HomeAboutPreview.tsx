@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
-import aboutFallback from "@/assets/about-preview.jpg";
+import aboutFallback from "@/assets/sunrise.jpg";
 import { useAboutContent } from "@/hooks/useSiteData";
 
 const HomeAboutPreview = () => {
