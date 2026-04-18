@@ -92,7 +92,7 @@ const Careers = () => {
           height={1080}
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/70 via-emerald-900/60 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/60 via-emerald-900/30 to-emerald-950/70" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
