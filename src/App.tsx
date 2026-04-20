@@ -19,6 +19,7 @@ import AdminSocial from "./pages/AdminSocial";
 import AdminHeroSlides from "./pages/AdminHeroSlides";
 import AdminServices from "./pages/AdminServices";
 import AdminAbout from "./pages/AdminAbout";
+import AdminCareers from "./pages/AdminCareers";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="hero" element={<AdminHeroSlides />} />
             <Route path="services" element={<AdminServices />} />
             <Route path="about" element={<AdminAbout />} />
+            <Route path="careers" element={<AdminCareers />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

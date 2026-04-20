@@ -7,6 +7,7 @@ export type SocialLink = Tables<"social_links">;
 export type HeroSlide = Tables<"hero_slides">;
 export type ServiceRow = Tables<"services">;
 export type AboutContent = Tables<"about_content">;
+export type CareersContent = Tables<"careers_content">;
 
 export function useSiteSettings() {
   const [data, setData] = useState<SiteSettings | null>(null);
@@ -69,6 +70,18 @@ export function useAboutContent() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     supabase.from("about_content").select("*").maybeSingle().then(({ data }) => {
+      setData(data);
+      setLoading(false);
+    });
+  }, []);
+  return { data, loading };
+}
+
+export function useCareersContent() {
+  const [data, setData] = useState<CareersContent | null>(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    supabase.from("careers_content").select("*").maybeSingle().then(({ data }) => {
       setData(data);
       setLoading(false);
     });

@@ -9,6 +9,7 @@ import {
   Star,
   Smile,
   Sparkles,
+  Briefcase,
   type LucideIcon,
 } from "lucide-react";
 
@@ -23,6 +24,7 @@ export const ICON_MAP: Record<string, LucideIcon> = {
   Star,
   Smile,
   Sparkles,
+  Briefcase,
 };
 
 export const ICON_NAMES = Object.keys(ICON_MAP);

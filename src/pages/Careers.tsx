@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Heart, Users, Send, Upload, FileText, X } from "lucide-react";
+import { Send, Upload, FileText, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -10,14 +10,25 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import cityBg from "@/assets/careers-city.jpg";
+import { useCareersContent } from "@/hooks/useSiteData";
+import { getIcon } from "@/lib/iconMap";
 
-const perks = [
-  { icon: Heart, title: "Meaningful Work", text: "Make a real difference in clients' lives every day." },
-  { icon: Users, title: "Supportive Team", text: "Join a caring, professional, and welcoming team." },
-  { icon: Briefcase, title: "Competitive Pay", text: "Fair wages, flexible schedules, and growth opportunities." },
+type Perk = { icon: string; title: string; text: string };
+
+const FALLBACK_PERKS: Perk[] = [
+  { icon: "Heart", title: "Meaningful Work", text: "Make a real difference in clients' lives every day." },
+  { icon: "Users", title: "Supportive Team", text: "Join a caring, professional, and welcoming team." },
+  { icon: "Briefcase", title: "Competitive Pay", text: "Fair wages, flexible schedules, and growth opportunities." },
 ];
 
 const Careers = () => {
+  const { data: content } = useCareersContent();
+  const perks: Perk[] = (content?.perks as unknown as Perk[]) ?? FALLBACK_PERKS;
+  const heroHeading = content?.hero_heading || "Join Our Caring Team";
+  const heroSub = content?.hero_subheading || "Build a rewarding career with Empire Home Care LLC — where compassion meets opportunity.";
+  const formHeading = content?.form_heading || "Apply Now";
+  const formDescription = content?.form_description || "Send us your details, attach your resume, and tell us a bit about yourself.";
+
   const [form, setForm] = useState({ full_name: "", email: "", phone: "", position: "", message: "" });
   const [resume, setResume] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
@@ -111,7 +122,7 @@ const Careers = () => {
             animate={{ opacity: 1, y: 0 }}
             className="font-display text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg"
           >
-            Join Our Caring Team
+            {heroHeading}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -119,7 +130,7 @@ const Careers = () => {
             transition={{ delay: 0.1 }}
             className="font-body text-lg text-white/90 max-w-2xl mx-auto drop-shadow"
           >
-            Build a rewarding career with Empire Home Care LLC — where compassion meets opportunity.
+            {heroSub}
           </motion.p>
         </div>
       </section>
@@ -127,29 +138,32 @@ const Careers = () => {
       {/* Perks */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4 grid md:grid-cols-3 gap-6">
-          {perks.map((p, i) => (
-            <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-card border border-border rounded-2xl p-6 text-center"
-            >
-              <p.icon className="h-10 w-10 text-secondary mx-auto mb-3" />
-              <h3 className="font-display text-xl font-semibold mb-2">{p.title}</h3>
-              <p className="text-foreground/70 font-body text-sm">{p.text}</p>
-            </motion.div>
-          ))}
+          {perks.map((p, i) => {
+            const Icon = getIcon(p.icon);
+            return (
+              <motion.div
+                key={`${p.title}-${i}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-card border border-border rounded-2xl p-6 text-center"
+              >
+                <Icon className="h-10 w-10 text-secondary mx-auto mb-3" />
+                <h3 className="font-display text-xl font-semibold mb-2">{p.title}</h3>
+                <p className="text-foreground/70 font-body text-sm">{p.text}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
       {/* Application Form */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 max-w-2xl">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-3">Apply Now</h2>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-3">{formHeading}</h2>
           <p className="text-center text-foreground/70 font-body mb-8">
-            Send us your details, attach your resume, and tell us a bit about yourself.
+            {formDescription}
           </p>
           <form onSubmit={handleSubmit} className="bg-card border border-border rounded-2xl p-6 md:p-8 space-y-4">
             <div>

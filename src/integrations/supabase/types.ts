@@ -83,6 +83,39 @@ export type Database = {
         }
         Relationships: []
       }
+      careers_content: {
+        Row: {
+          created_at: string
+          form_description: string | null
+          form_heading: string | null
+          hero_heading: string | null
+          hero_subheading: string | null
+          id: string
+          perks: Json
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          form_description?: string | null
+          form_heading?: string | null
+          hero_heading?: string | null
+          hero_subheading?: string | null
+          id?: string
+          perks?: Json
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          form_description?: string | null
+          form_heading?: string | null
+          hero_heading?: string | null
+          hero_subheading?: string | null
+          id?: string
+          perks?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
