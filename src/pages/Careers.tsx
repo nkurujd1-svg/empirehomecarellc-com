@@ -122,7 +122,7 @@ const Careers = () => {
             animate={{ opacity: 1, y: 0 }}
             className="font-display text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg"
           >
-            Join Our Caring Team
+            {heroHeading}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
