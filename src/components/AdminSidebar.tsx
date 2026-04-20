@@ -27,6 +27,7 @@ const content = [
   { title: "Hero Slides", url: "/admin/hero", icon: Images },
   { title: "Services", url: "/admin/services", icon: Briefcase },
   { title: "About Page", url: "/admin/about", icon: Info },
+  { title: "Careers Page", url: "/admin/careers", icon: GraduationCap },
 ];
 
 export function AdminSidebar() {
