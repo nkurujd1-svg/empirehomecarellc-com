@@ -138,20 +138,23 @@ const Careers = () => {
       {/* Perks */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4 grid md:grid-cols-3 gap-6">
-          {perks.map((p, i) => (
-            <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-card border border-border rounded-2xl p-6 text-center"
-            >
-              <p.icon className="h-10 w-10 text-secondary mx-auto mb-3" />
-              <h3 className="font-display text-xl font-semibold mb-2">{p.title}</h3>
-              <p className="text-foreground/70 font-body text-sm">{p.text}</p>
-            </motion.div>
-          ))}
+          {perks.map((p, i) => {
+            const Icon = getIcon(p.icon);
+            return (
+              <motion.div
+                key={`${p.title}-${i}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-card border border-border rounded-2xl p-6 text-center"
+              >
+                <Icon className="h-10 w-10 text-secondary mx-auto mb-3" />
+                <h3 className="font-display text-xl font-semibold mb-2">{p.title}</h3>
+                <p className="text-foreground/70 font-body text-sm">{p.text}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
