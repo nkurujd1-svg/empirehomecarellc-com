@@ -7,6 +7,7 @@ export type SocialLink = Tables<"social_links">;
 export type HeroSlide = Tables<"hero_slides">;
 export type ServiceRow = Tables<"services">;
 export type AboutContent = Tables<"about_content">;
+export type CareersContent = Tables<"careers_content">;
 
 export function useSiteSettings() {
   const [data, setData] = useState<SiteSettings | null>(null);
