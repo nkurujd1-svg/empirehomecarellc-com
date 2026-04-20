@@ -19,6 +19,7 @@ import AdminSocial from "./pages/AdminSocial";
 import AdminHeroSlides from "./pages/AdminHeroSlides";
 import AdminServices from "./pages/AdminServices";
 import AdminAbout from "./pages/AdminAbout";
+import AdminCareers from "./pages/AdminCareers";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
