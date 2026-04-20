@@ -1,4 +1,4 @@
-import { LayoutDashboard, MessageSquare, Star, LogOut, Building2, Share2, Images, Briefcase, Info } from "lucide-react";
+import { LayoutDashboard, MessageSquare, Star, LogOut, Building2, Share2, Images, Briefcase, Info, GraduationCap } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/empire-home-care-logo.png";
