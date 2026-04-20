@@ -76,3 +76,15 @@ export function useAboutContent() {
   }, []);
   return { data, loading };
 }
+
+export function useCareersContent() {
+  const [data, setData] = useState<CareersContent | null>(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    supabase.from("careers_content").select("*").maybeSingle().then(({ data }) => {
+      setData(data);
+      setLoading(false);
+    });
+  }, []);
+  return { data, loading };
+}
