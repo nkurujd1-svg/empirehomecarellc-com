@@ -130,7 +130,7 @@ const Careers = () => {
             transition={{ delay: 0.1 }}
             className="font-body text-lg text-white/90 max-w-2xl mx-auto drop-shadow"
           >
-            Build a rewarding career with Empire Home Care LLC — where compassion meets opportunity.
+            {heroSub}
           </motion.p>
         </div>
       </section>
