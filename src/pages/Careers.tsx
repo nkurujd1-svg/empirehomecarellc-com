@@ -161,9 +161,9 @@ const Careers = () => {
       {/* Application Form */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 max-w-2xl">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-3">Apply Now</h2>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-3">{formHeading}</h2>
           <p className="text-center text-foreground/70 font-body mb-8">
-            Send us your details, attach your resume, and tell us a bit about yourself.
+            {formDescription}
           </p>
           <form onSubmit={handleSubmit} className="bg-card border border-border rounded-2xl p-6 md:p-8 space-y-4">
             <div>
