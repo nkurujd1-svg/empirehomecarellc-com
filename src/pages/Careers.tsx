@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Heart, Users, Send, Upload, FileText, X } from "lucide-react";
+import { Send, Upload, FileText, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -10,11 +10,15 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import cityBg from "@/assets/careers-city.jpg";
+import { useCareersContent } from "@/hooks/useSiteData";
+import { getIcon } from "@/lib/iconMap";
 
-const perks = [
-  { icon: Heart, title: "Meaningful Work", text: "Make a real difference in clients' lives every day." },
-  { icon: Users, title: "Supportive Team", text: "Join a caring, professional, and welcoming team." },
-  { icon: Briefcase, title: "Competitive Pay", text: "Fair wages, flexible schedules, and growth opportunities." },
+type Perk = { icon: string; title: string; text: string };
+
+const FALLBACK_PERKS: Perk[] = [
+  { icon: "Heart", title: "Meaningful Work", text: "Make a real difference in clients' lives every day." },
+  { icon: "Users", title: "Supportive Team", text: "Join a caring, professional, and welcoming team." },
+  { icon: "Briefcase", title: "Competitive Pay", text: "Fair wages, flexible schedules, and growth opportunities." },
 ];
 
 const Careers = () => {
