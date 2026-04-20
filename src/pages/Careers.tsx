@@ -22,6 +22,13 @@ const FALLBACK_PERKS: Perk[] = [
 ];
 
 const Careers = () => {
+  const { data: content } = useCareersContent();
+  const perks: Perk[] = (content?.perks as unknown as Perk[]) ?? FALLBACK_PERKS;
+  const heroHeading = content?.hero_heading || "Join Our Caring Team";
+  const heroSub = content?.hero_subheading || "Build a rewarding career with Empire Home Care LLC — where compassion meets opportunity.";
+  const formHeading = content?.form_heading || "Apply Now";
+  const formDescription = content?.form_description || "Send us your details, attach your resume, and tell us a bit about yourself.";
+
   const [form, setForm] = useState({ full_name: "", email: "", phone: "", position: "", message: "" });
   const [resume, setResume] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
