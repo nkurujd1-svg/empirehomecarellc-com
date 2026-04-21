@@ -1,7 +1,15 @@
 import { motion } from "framer-motion";
 import servicesHero from "@/assets/services-hero.jpg";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 const ServicesHero = () => {
+  const { data } = useSiteContent("services", {
+    eyebrow: "Our Services",
+    hero_heading: "Compassionate Care, Right at Home",
+    hero_subheading:
+      "Personalized home health services designed to support independence, comfort, and dignity for every individual we serve.",
+  });
+
   return (
     <section className="relative h-[60vh] min-h-[400px] w-full overflow-hidden">
       <img
@@ -20,14 +28,13 @@ const ServicesHero = () => {
           className="max-w-2xl text-background"
         >
           <span className="text-sm font-semibold uppercase tracking-widest text-secondary font-body">
-            Our Services
+            {data.eyebrow}
           </span>
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold mt-3 mb-5 leading-tight">
-            Compassionate Care, Right at Home
+            {data.hero_heading}
           </h1>
           <p className="font-body text-lg text-background/90 leading-relaxed max-w-xl">
-            Personalized home health services designed to support independence,
-            comfort, and dignity for every individual we serve.
+            {data.hero_subheading}
           </p>
         </motion.div>
       </div>
