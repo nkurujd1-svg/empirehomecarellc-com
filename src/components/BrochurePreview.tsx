@@ -47,11 +47,11 @@ const BrochurePreview = () => {
             Take a Look Inside
           </h2>
           <p className="text-muted-foreground font-body">
-            Browse all 4 pages of our brochure below. Tap any page to zoom in, or download the full PDF.
+            Browse both pages of our brochure below. Tap any page to zoom in, or download the full PDF.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 max-w-5xl mx-auto mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-6xl mx-auto mb-10">
           {PAGES.map((src, i) => (
             <motion.button
               key={src}
