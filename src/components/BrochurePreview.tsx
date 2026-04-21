@@ -36,7 +36,7 @@ const BrochurePreview = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto mb-10">
           {PAGES.map((src, i) => (
             <motion.a
               key={src}
@@ -54,7 +54,7 @@ const BrochurePreview = () => {
                 src={src}
                 alt={`Brochure page ${i + 1}`}
                 loading="lazy"
-                className="block w-full h-auto object-contain"
+                className="block w-full h-auto"
               />
               <div className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur px-3 py-1 text-xs font-semibold text-foreground">
                 Page {i + 1}
