@@ -9,7 +9,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import cityBg from "@/assets/careers-city.jpg";
 import { useCareersContent } from "@/hooks/useSiteData";
 import { getIcon } from "@/lib/iconMap";
 
@@ -94,33 +93,13 @@ const Careers = () => {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* Hero with Sioux Falls cityscape — marquee pan */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="flex h-full w-[200%] animate-marquee-x will-change-transform">
-            <img
-              src={cityBg}
-              alt="Sioux Falls, South Dakota cityscape"
-              width={1920}
-              height={1080}
-              className="h-full w-1/2 object-cover shrink-0"
-            />
-            <img
-              src={cityBg}
-              alt=""
-              aria-hidden="true"
-              width={1920}
-              height={1080}
-              className="h-full w-1/2 object-cover shrink-0"
-            />
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/55 via-slate-900/35 to-slate-950/65" />
+      {/* Hero */}
+      <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-b from-primary/10 via-background to-background">
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg"
+            className="font-display text-4xl md:text-6xl font-bold text-foreground mb-4"
           >
             {heroHeading}
           </motion.h1>
@@ -128,7 +107,7 @@ const Careers = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-body text-lg text-white/90 max-w-2xl mx-auto drop-shadow"
+            className="font-body text-lg text-muted-foreground max-w-2xl mx-auto"
           >
             {heroSub}
           </motion.p>
