@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import HomeAboutPreview from "@/components/HomeAboutPreview";
 import HomeServicesPreview from "@/components/HomeServicesPreview";
+import BrochurePreview from "@/components/BrochurePreview";
 import Footer from "@/components/Footer";
 
 const Home = () => (
@@ -10,6 +11,7 @@ const Home = () => (
     <HeroSection />
     <HomeAboutPreview />
     <HomeServicesPreview />
+    <BrochurePreview />
     <Footer />
   </div>
 );
