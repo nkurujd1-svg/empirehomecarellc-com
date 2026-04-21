@@ -49,7 +49,7 @@ const BrochurePreview = () => {
             Take a Look Inside
           </h2>
           <p className="text-muted-foreground font-body">
-            Browse all 3 pages of our brochure below. Tap any page to zoom in, or download the full PDF.
+            Browse all 4 pages of our brochure below. Tap any page to zoom in, or download the full PDF.
           </p>
         </motion.div>
 
