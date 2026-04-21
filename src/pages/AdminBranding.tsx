@@ -6,8 +6,11 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ImageUploadField } from "@/components/admin/ImageUploadField";
+import { Switch } from "@/components/ui/switch";
+import { uploadSiteAsset } from "@/lib/uploadSiteAsset";
 import { toast } from "@/hooks/use-toast";
-import { Save, Loader2, Building2 } from "lucide-react";
+import { Save, Loader2, Building2, FileText, Upload, ExternalLink } from "lucide-react";
+import { useRef, useState as useStateReact } from "react";
 
 interface SiteSettings {
   id: string;
@@ -21,6 +24,9 @@ interface SiteSettings {
   address_map_url: string | null;
   opening_hours: string | null;
   footer_about: string | null;
+  brochure_url: string | null;
+  brochure_label: string | null;
+  brochure_visible: boolean | null;
 }
 
 const AdminBranding = () => {
