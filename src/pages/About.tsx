@@ -4,6 +4,7 @@ import BrochureDownload from "@/components/BrochureDownload";
 import MissionVisionValues from "@/components/MissionVisionValues";
 import Footer from "@/components/Footer";
 import oceanImage from "@/assets/ocean.jpg";
+import brochureCover from "@/assets/brochure/cover-preview.png";
 import { useSiteContent } from "@/hooks/useSiteContent";
 
 const About = () => {
