@@ -1,12 +1,19 @@
 import { Link } from "react-router-dom";
 import logoFallback from "@/assets/empire-home-care-logo.png";
 import { useServices, useSiteSettings, useSocialLinks } from "@/hooks/useSiteData";
+import { useSiteContent } from "@/hooks/useSiteContent";
 import { getSocialIcon, getSocialLabel } from "@/lib/socialIcons";
 
 const Footer = () => {
   const { data: settings } = useSiteSettings();
   const socials = useSocialLinks();
   const { data: services } = useServices();
+  const { data: footerContent } = useSiteContent("footer", {
+    quick_links_heading: "Quick Links",
+    services_heading: "Our Services",
+    copyright_suffix: "All rights reserved.",
+    tagline: "Made with ❤️ for families",
+  });
 
   const logo = settings?.logo_url || logoFallback;
   const businessName = settings?.business_name || "Empire Home Care LLC";
@@ -71,7 +78,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-heading font-semibold text-primary-foreground mb-4">Quick Links</h4>
+            <h4 className="font-heading font-semibold text-primary-foreground mb-4">{footerContent.quick_links_heading}</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.path}>
@@ -87,7 +94,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-heading font-semibold text-primary-foreground mb-4">Our Services</h4>
+            <h4 className="font-heading font-semibold text-primary-foreground mb-4">{footerContent.services_heading}</h4>
             <ul className="space-y-2">
               {services.map((s) => (
                 <li key={s.id}>
@@ -105,10 +112,10 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-primary-foreground/40 text-xs font-body">
-            © {new Date().getFullYear()} {businessName}. All rights reserved.
+            © {new Date().getFullYear()} {businessName}. {footerContent.copyright_suffix}
           </p>
           <p className="text-primary-foreground/40 text-xs font-body flex items-center gap-1">
-            Made with ❤️ for families
+            {footerContent.tagline}
           </p>
         </div>
       </div>

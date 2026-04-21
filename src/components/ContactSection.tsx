@@ -4,6 +4,7 @@ import { Phone, Mail, MapPin, Clock, ArrowRight, RefreshCw } from "lucide-react"
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { useSiteSettings } from "@/hooks/useSiteData";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 const generatePuzzle = () => {
   const a = Math.floor(Math.random() * 9) + 1;
@@ -16,6 +17,14 @@ const generatePuzzle = () => {
 
 const ContactSection = () => {
   const { data: settings } = useSiteSettings();
+  const { data: content } = useSiteContent("contact", {
+    eyebrow: "Get In Touch",
+    heading: "Ready to Start",
+    heading_accent: "Caring?",
+    intro:
+      "Contact us today for a free consultation. We'll work with you to create a personalized care plan that meets your family's unique needs.",
+    submit_label: "Request Free Consultation",
+  });
   const [formData, setFormData] = useState({ full_name: "", phone: "", email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const [puzzle, setPuzzle] = useState(generatePuzzle);
@@ -76,14 +85,16 @@ const ContactSection = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="text-sm font-semibold uppercase tracking-widest text-secondary font-body">
-              Get In Touch
+              {content.eyebrow}
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mt-3 mb-6">
-              Ready to Start <span className="text-secondary">Caring?</span>
+              {content.heading}{" "}
+              {content.heading_accent && (
+                <span className="text-secondary">{content.heading_accent}</span>
+              )}
             </h2>
             <p className="text-muted-foreground font-body leading-relaxed mb-10">
-              Contact us today for a free consultation. We'll work with you to create a
-              personalized care plan that meets your family's unique needs.
+              {content.intro}
             </p>
 
             <div className="space-y-6">
@@ -166,7 +177,7 @@ const ContactSection = () => {
                 </div>
               </div>
               <button type="submit" disabled={submitting} className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-7 py-3.5 text-base font-semibold text-secondary-foreground hover:bg-secondary/90 transition-colors disabled:opacity-50">
-                {submitting ? "Sending..." : "Request Free Consultation"}
+                {submitting ? "Sending..." : content.submit_label}
                 <ArrowRight className="h-5 w-5" />
               </button>
             </form>

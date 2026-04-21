@@ -19,6 +19,7 @@ import AdminHeroSlides from "./pages/AdminHeroSlides";
 import AdminServices from "./pages/AdminServices";
 import AdminAbout from "./pages/AdminAbout";
 import AdminCareers from "./pages/AdminCareers";
+import AdminPageContent from "./pages/AdminPageContent";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="services" element={<AdminServices />} />
             <Route path="about" element={<AdminAbout />} />
             <Route path="careers" element={<AdminCareers />} />
+            <Route path="page-content" element={<AdminPageContent />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
