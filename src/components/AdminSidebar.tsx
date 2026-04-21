@@ -1,4 +1,4 @@
-import { LayoutDashboard, MessageSquare, LogOut, Building2, Share2, Images, Briefcase, Info, GraduationCap } from "lucide-react";
+import { LayoutDashboard, MessageSquare, LogOut, Building2, Share2, Images, Briefcase, Info, GraduationCap, FileText } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/empire-home-care-logo.png";
@@ -27,6 +27,7 @@ const content = [
   { title: "Services", url: "/admin/services", icon: Briefcase },
   { title: "About Page", url: "/admin/about", icon: Info },
   { title: "Careers Page", url: "/admin/careers", icon: GraduationCap },
+  { title: "Page Content", url: "/admin/page-content", icon: FileText },
 ];
 
 export function AdminSidebar() {
