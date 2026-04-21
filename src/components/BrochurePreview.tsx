@@ -5,10 +5,9 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useSiteSettings } from "@/hooks/useSiteData";
 
 const PAGES = [
-  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v13-p1a.jpg",
-  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v13-p1b.jpg",
-  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v13-p2a.jpg",
-  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v13-p2b.jpg",
+  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v14-page-1.jpg",
+  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v14-page-2.jpg",
+  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v14-page-3.jpg",
 ];
 
 const ZOOM_STEPS = [1, 1.5, 2, 3];
@@ -20,7 +19,7 @@ const BrochurePreview = () => {
   const visible = settings?.brochure_visible ?? true;
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [zoomIdx, setZoomIdx] = useState(0); // index into ZOOM_STEPS
+  const [zoomIdx, setZoomIdx] = useState(0);
 
   if (!visible || !url) return null;
 
@@ -49,11 +48,11 @@ const BrochurePreview = () => {
             Take a Look Inside
           </h2>
           <p className="text-muted-foreground font-body">
-            Tap any page to zoom in and read every detail, or download the full PDF.
+            Browse all 3 pages of our brochure below. Tap any page to zoom in, or download the full PDF.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-10">
           {PAGES.map((src, i) => (
             <motion.button
               key={src}
@@ -101,14 +100,12 @@ const BrochurePreview = () => {
         </div>
       </div>
 
-      {/* Lightbox */}
       <Dialog open={openIndex !== null} onOpenChange={(o) => !o && closeLightbox()}>
         <DialogContent
           className="max-w-[100vw] sm:max-w-[95vw] w-[100vw] sm:w-[95vw] h-[100vh] sm:h-[95vh] p-0 bg-background/95 backdrop-blur border-0 sm:rounded-xl overflow-hidden [&>button]:hidden"
         >
           {openIndex !== null && (
             <div className="relative flex flex-col w-full h-full">
-              {/* Toolbar */}
               <div className="flex items-center justify-between gap-2 px-4 py-3 border-b bg-background/80 backdrop-blur">
                 <span className="text-sm font-semibold text-foreground">
                   Page {openIndex + 1} of {PAGES.length}
@@ -151,7 +148,6 @@ const BrochurePreview = () => {
                 </div>
               </div>
 
-              {/* Scrollable image area */}
               <div className="flex-1 overflow-auto bg-muted/40">
                 <div className="min-h-full flex items-start justify-center p-4">
                   <img
