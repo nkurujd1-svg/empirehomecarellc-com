@@ -42,6 +42,36 @@ const About = () => {
     </section>
 
     <AboutSection />
+
+    <section className="py-16 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-border bg-muted">
+            <img
+              src={brochureCover}
+              alt="Empire Home Care brochure cover preview"
+              width={1600}
+              height={2070}
+              loading="lazy"
+              className="w-full h-auto block"
+            />
+          </div>
+          <div>
+            <span className="text-sm font-semibold uppercase tracking-widest text-secondary font-body">
+              Preview
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mt-3 mb-4">
+              Take a peek at our brochure
+            </h2>
+            <p className="text-muted-foreground font-body leading-relaxed">
+              See what's inside before you download — our services, philosophy,
+              and what makes Empire Home Care a trusted partner for your family.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <BrochureDownload />
     <MissionVisionValues />
     <Footer />
