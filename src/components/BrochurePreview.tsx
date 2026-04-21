@@ -36,7 +36,7 @@ const BrochurePreview = () => {
           </p>
         </motion.div>
 
-        <div className="flex flex-col md:flex-row flex-wrap justify-center items-start gap-6 max-w-6xl mx-auto mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto mb-10">
           {PAGES.map((src, i) => (
             <motion.a
               key={src}
@@ -48,13 +48,13 @@ const BrochurePreview = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               whileHover={{ y: -6 }}
-              className="group relative block rounded-xl overflow-hidden border bg-card shadow-lg hover:shadow-2xl transition-all w-full max-w-[560px]"
+              className="group relative block rounded-xl overflow-hidden border bg-card shadow-lg hover:shadow-2xl transition-all w-full"
             >
               <img
                 src={src}
                 alt={`Brochure page ${i + 1}`}
                 loading="lazy"
-                className="block w-full h-auto"
+                className="block w-full h-auto object-contain"
               />
               <div className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur px-3 py-1 text-xs font-semibold text-foreground">
                 Page {i + 1}
