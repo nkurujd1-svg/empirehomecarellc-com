@@ -5,9 +5,10 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useSiteSettings } from "@/hooks/useSiteData";
 
 const PAGES = [
-  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v14-page-1.jpg",
-  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v14-page-2.jpg",
-  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v14-page-3.jpg",
+  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v7-page-1.jpg",
+  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v7-page-2.jpg",
+  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v7-page-3.jpg",
+  "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v7-page-4.jpg",
 ];
 
 const ZOOM_STEPS = [1, 1.5, 2, 3];
@@ -48,11 +49,11 @@ const BrochurePreview = () => {
             Take a Look Inside
           </h2>
           <p className="text-muted-foreground font-body">
-            Browse all 3 pages of our brochure below. Tap any page to zoom in, or download the full PDF.
+            Browse all 4 pages of our brochure below. Tap any page to zoom in, or download the full PDF.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-10">
           {PAGES.map((src, i) => (
             <motion.button
               key={src}
