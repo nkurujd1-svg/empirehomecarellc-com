@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Download } from "lucide-react";
+import { Download, Maximize2, Minimize2 } from "lucide-react";
 import { useSiteSettings } from "@/hooks/useSiteData";
 
 const PAGES = [
@@ -7,13 +8,18 @@ const PAGES = [
   "https://tyrpfkdbzpqjyxkchism.supabase.co/storage/v1/object/public/site-assets/misc/brochure-v13-page-2.jpg",
 ];
 
+type ViewMode = "fit" | "original";
+
 const BrochurePreview = () => {
   const { data: settings } = useSiteSettings();
+  const [mode, setMode] = useState<ViewMode>("fit");
   const url = settings?.brochure_url;
   const label = settings?.brochure_label || "Download Brochure";
   const visible = settings?.brochure_visible ?? true;
 
   if (!visible || !url) return null;
+
+  const isOriginal = mode === "original";
 
   return (
     <section className="py-20 bg-muted/30">
@@ -23,7 +29,7 @@ const BrochurePreview = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-12"
+          className="text-center max-w-2xl mx-auto mb-8"
         >
           <p className="text-sm font-semibold uppercase tracking-wider text-secondary mb-3">
             Our Brochure
@@ -36,32 +42,102 @@ const BrochurePreview = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto mb-10">
-          {PAGES.map((src, i) => (
-            <motion.a
-              key={src}
-              href={url}
-              target="_blank"
-              rel="noreferrer"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              whileHover={{ y: -6 }}
-              className="group relative block rounded-xl overflow-hidden border bg-card shadow-lg hover:shadow-2xl transition-all w-full"
+        {/* View mode toggle */}
+        <div className="flex justify-center mb-8">
+          <div
+            role="tablist"
+            aria-label="Brochure view mode"
+            className="inline-flex items-center rounded-full border bg-card p-1 shadow-sm"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={!isOriginal}
+              onClick={() => setMode("fit")}
+              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs sm:text-sm font-semibold transition-colors ${
+                !isOriginal
+                  ? "bg-secondary text-secondary-foreground shadow"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
-              <img
-                src={src}
-                alt={`Brochure page ${i + 1}`}
-                loading="lazy"
-                className="block w-full h-auto"
-              />
-              <div className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur px-3 py-1 text-xs font-semibold text-foreground">
-                Page {i + 1}
-              </div>
-            </motion.a>
-          ))}
+              <Minimize2 className="h-4 w-4" />
+              Fit to screen
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={isOriginal}
+              onClick={() => setMode("original")}
+              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs sm:text-sm font-semibold transition-colors ${
+                isOriginal
+                  ? "bg-secondary text-secondary-foreground shadow"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Maximize2 className="h-4 w-4" />
+              Original size
+            </button>
+          </div>
         </div>
+
+        <div
+          className={
+            isOriginal
+              ? "max-w-7xl mx-auto mb-10 space-y-6"
+              : "grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto mb-10"
+          }
+        >
+          {PAGES.map((src, i) => {
+            const card = (
+              <motion.a
+                key={src}
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                whileHover={{ y: -6 }}
+                className="group relative block rounded-xl overflow-hidden border bg-card shadow-lg hover:shadow-2xl transition-all"
+                style={isOriginal ? { width: "max-content", maxWidth: "none" } : undefined}
+              >
+                <img
+                  src={src}
+                  alt={`Brochure page ${i + 1}`}
+                  loading="lazy"
+                  className={
+                    isOriginal
+                      ? "block max-w-none h-auto"
+                      : "block w-full h-auto"
+                  }
+                />
+                <div className="absolute top-3 left-3 rounded-full bg-background/90 backdrop-blur px-3 py-1 text-xs font-semibold text-foreground">
+                  Page {i + 1}
+                </div>
+              </motion.a>
+            );
+
+            // In original mode, wrap each page in a horizontal scroll container
+            return isOriginal ? (
+              <div
+                key={src}
+                className="overflow-x-auto rounded-xl"
+                aria-label={`Scroll page ${i + 1} horizontally`}
+              >
+                {card}
+              </div>
+            ) : (
+              card
+            );
+          })}
+        </div>
+
+        {isOriginal && (
+          <p className="text-center text-xs text-muted-foreground mb-6">
+            Tip: scroll horizontally to view the full page at original size.
+          </p>
+        )}
 
         <div className="text-center">
           <a
