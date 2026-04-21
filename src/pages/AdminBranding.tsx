@@ -62,6 +62,9 @@ const AdminBranding = () => {
         address_map_url: settings.address_map_url,
         opening_hours: settings.opening_hours,
         footer_about: settings.footer_about,
+        brochure_url: settings.brochure_url,
+        brochure_label: settings.brochure_label,
+        brochure_visible: settings.brochure_visible ?? true,
       })
       .eq("id", settings.id);
     setSaving(false);
