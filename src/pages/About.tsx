@@ -45,6 +45,7 @@ const About = () => {
     <MissionVisionValues />
     <Footer />
   </div>
-);
+  );
+};
 
 export default About;
