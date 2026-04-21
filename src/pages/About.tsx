@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import AboutSection from "@/components/AboutSection";
+import BrochureDownload from "@/components/BrochureDownload";
 import MissionVisionValues from "@/components/MissionVisionValues";
 import Footer from "@/components/Footer";
 import oceanImage from "@/assets/ocean.jpg";
@@ -44,6 +45,7 @@ const About = () => (
     </section>
 
     <AboutSection />
+    <BrochureDownload />
     <MissionVisionValues />
     <Footer />
   </div>
