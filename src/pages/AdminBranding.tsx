@@ -6,8 +6,11 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ImageUploadField } from "@/components/admin/ImageUploadField";
+import { Switch } from "@/components/ui/switch";
+import { uploadSiteAsset } from "@/lib/uploadSiteAsset";
 import { toast } from "@/hooks/use-toast";
-import { Save, Loader2, Building2 } from "lucide-react";
+import { Save, Loader2, Building2, FileText, Upload, ExternalLink } from "lucide-react";
+import { useRef, useState as useStateReact } from "react";
 
 interface SiteSettings {
   id: string;
@@ -21,6 +24,9 @@ interface SiteSettings {
   address_map_url: string | null;
   opening_hours: string | null;
   footer_about: string | null;
+  brochure_url: string | null;
+  brochure_label: string | null;
+  brochure_visible: boolean | null;
 }
 
 const AdminBranding = () => {
@@ -56,6 +62,9 @@ const AdminBranding = () => {
         address_map_url: settings.address_map_url,
         opening_hours: settings.opening_hours,
         footer_about: settings.footer_about,
+        brochure_url: settings.brochure_url,
+        brochure_label: settings.brochure_label,
+        brochure_visible: settings.brochure_visible ?? true,
       })
       .eq("id", settings.id);
     setSaving(false);
@@ -194,7 +203,117 @@ const AdminBranding = () => {
           </div>
         </CardContent>
       </Card>
+
+      <BrochureCard settings={settings} update={update} />
     </div>
+  );
+};
+
+const BrochureCard = ({
+  settings,
+  update,
+}: {
+  settings: SiteSettings;
+  update: (patch: Partial<SiteSettings>) => void;
+}) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useStateReact(false);
+
+  const handleFile = async (file: File) => {
+    if (file.type !== "application/pdf") {
+      toast({ title: "Invalid file", description: "Please choose a PDF.", variant: "destructive" });
+      return;
+    }
+    if (file.size > 20 * 1024 * 1024) {
+      toast({ title: "File too large", description: "Max 20MB.", variant: "destructive" });
+      return;
+    }
+    setUploading(true);
+    const url = await uploadSiteAsset(file, "misc");
+    setUploading(false);
+    if (url) {
+      update({ brochure_url: url });
+      toast({ title: "Brochure uploaded", description: "Don't forget to save changes." });
+    } else {
+      toast({ title: "Upload failed", variant: "destructive" });
+    }
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-lg flex items-center gap-2">
+          <FileText className="h-5 w-5" /> Downloadable brochure
+        </CardTitle>
+        <CardDescription>
+          Upload a PDF brochure. A download button will appear on the homepage when visible.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <input
+          ref={inputRef}
+          type="file"
+          accept="application/pdf"
+          className="hidden"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) handleFile(file);
+            e.target.value = "";
+          }}
+        />
+        <div className="flex items-center justify-between gap-4 p-3 rounded-lg border bg-muted/30">
+          <div className="min-w-0">
+            <p className="text-sm font-medium">Current brochure</p>
+            {settings.brochure_url ? (
+              <a
+                href={settings.brochure_url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-primary inline-flex items-center gap-1 truncate max-w-full"
+              >
+                <ExternalLink className="h-3 w-3" />
+                <span className="truncate">{settings.brochure_url.split("/").pop()}</span>
+              </a>
+            ) : (
+              <p className="text-xs text-muted-foreground">No brochure uploaded yet.</p>
+            )}
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => inputRef.current?.click()}
+            disabled={uploading}
+          >
+            {uploading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Upload className="h-4 w-4 mr-2" />}
+            {settings.brochure_url ? "Replace PDF" : "Upload PDF"}
+          </Button>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label>Button label</Label>
+            <Input
+              value={settings.brochure_label || ""}
+              onChange={(e) => update({ brochure_label: e.target.value })}
+              placeholder="Download Brochure"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label>Show download button</Label>
+            <div className="flex items-center gap-3 h-10">
+              <Switch
+                checked={settings.brochure_visible ?? true}
+                onCheckedChange={(v) => update({ brochure_visible: v })}
+              />
+              <span className="text-sm text-muted-foreground">
+                {settings.brochure_visible ? "Visible on site" : "Hidden"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

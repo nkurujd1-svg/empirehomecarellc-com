@@ -273,6 +273,9 @@ export type Database = {
         Row: {
           address: string | null
           address_map_url: string | null
+          brochure_label: string | null
+          brochure_url: string | null
+          brochure_visible: boolean | null
           business_name: string
           created_at: string
           email: string | null
@@ -288,6 +291,9 @@ export type Database = {
         Insert: {
           address?: string | null
           address_map_url?: string | null
+          brochure_label?: string | null
+          brochure_url?: string | null
+          brochure_visible?: boolean | null
           business_name?: string
           created_at?: string
           email?: string | null
@@ -303,6 +309,9 @@ export type Database = {
         Update: {
           address?: string | null
           address_map_url?: string | null
+          brochure_label?: string | null
+          brochure_url?: string | null
+          brochure_visible?: boolean | null
           business_name?: string
           created_at?: string
           email?: string | null

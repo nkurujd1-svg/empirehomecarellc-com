@@ -1,11 +1,15 @@
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle, Heart } from "lucide-react";
+import { ArrowRight, CheckCircle, Heart, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import aboutFallback from "@/assets/home-about-caregiver.png";
-import { useAboutContent } from "@/hooks/useSiteData";
+import { useAboutContent, useSiteSettings } from "@/hooks/useSiteData";
 
 const HomeAboutPreview = () => {
   const { data } = useAboutContent();
+  const { data: settings } = useSiteSettings();
+  const brochureUrl = settings?.brochure_url;
+  const brochureLabel = settings?.brochure_label || "Download Brochure";
+  const brochureVisible = settings?.brochure_visible ?? true;
   const image = data?.preview_image_url || aboutFallback;
   const heading = data?.preview_heading || "Caring for Your Family";
   const accent = data?.preview_heading_accent || "Like Our Own";
@@ -67,13 +71,27 @@ const HomeAboutPreview = () => {
               </ul>
             )}
 
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
-            >
-              Learn More About Us
-              <ArrowRight className="h-5 w-5" />
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+              >
+                Learn More About Us
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+              {brochureVisible && brochureUrl && (
+                <a
+                  href={brochureUrl}
+                  download
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border-2 border-secondary bg-background px-7 py-3.5 text-base font-semibold text-secondary hover:bg-secondary hover:text-secondary-foreground transition-colors"
+                >
+                  <Download className="h-5 w-5" />
+                  {brochureLabel}
+                </a>
+              )}
+            </div>
           </motion.div>
         </div>
       </div>
